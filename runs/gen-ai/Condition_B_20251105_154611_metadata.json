@@ -1,0 +1,11 @@
+{
+    "prompt_name": "Condition_B",
+    "timestamp": "20251105_154611",
+    "model": "gemini-2.5-pro",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "input_tokens": 2559,
+    "output_tokens": 8183,
+    "total_tokens": 14562,
+    "system_instruction": "You are an experienced business architect. Adhere strictly to all instructions and provide output in the exact requested format."
+}

@@ -1,0 +1,86 @@
+======================================================================
+          ARCHITECTURAL COHERENCE VALIDATION REPORT
+======================================================================
+
+OVERALL STATUS: FAILED
+
+VALIDATION SUMMARY:
+  - Total Violations: 55/510 (10.78%)
+  - FAILED Rules: C3, C4, C5, C6, C7, C8
+  - PASSED Rules: C0, C1, C2, C9
+
+NOTE: If C0, C1 or C2 fails, the results become unreliable.
+
+----------------------------------------------------------------------
+                   DETAILED VIOLATION ANALYSIS
+----------------------------------------------------------------------
+
+[!!] C3 - Consistent refinement depth: 10/54 (18.52%)
+----------------------------------------------------------------------
+ * Statement: All leaf elements (elements without children) must have the same number of ancestors.
+ * Examples of violating items: 
+   - business-object: Academic Program
+   - business-object: Student Qualification
+   - business-object: Research Infrastructure Record
+   - business-object: Researcher Profile
+   - business-object: Student Application
+
+[!!] C4 - Upward coherence: 21/60 (35%)
+----------------------------------------------------------------------
+ * Statement: A non-hierarchical relationship between two elements requires a corresponding relationship between their parents (if any), with one exception: the relationship does not need to be propagated if the parent elements are both primary capabilities within the same top-level value stream.
+ * Examples of violating items: 
+   - serving-relationship: (Curriculum Review) --> (Refine Curriculum)
+   - serving-relationship: (Accreditation Submission) --> (Secure Accreditation)
+   - serving-relationship: (Talent Recruitment & Retention) --> (Recruit & Develop Researchers)
+   - serving-relationship: (Quality Auditing) --> (Monitor Research Performance)
+   - serving-relationship: (Relationship Nurturing) --> (Foster Research Collaboration)
+
+[!!] C5 - Downward coherence: 8/31 (25.81%)
+----------------------------------------------------------------------
+ * Statement: A relationship between two parent elements requires that at least one pair of their respective children (if any) is also related.
+ * Examples of violating items: 
+   - serving-relationship: (Researcher Development) --> (Cultivate Research Excellence)
+   - serving-relationship: (Skills Training & Mentoring) --> (Researcher Development)
+   - association-relationship: (Academic Portfolio Management) --> (Academic Portfolio)
+   - association-relationship: (Research Capacity Management) --> (Research Capacity)
+   - association-relationship: (Student Lifecycle Management) --> (Student Record)
+
+[!!] C6 - Capability Impact: 7/39 (17.95%)
+----------------------------------------------------------------------
+ * Statement: Each business capability must transform exactly one business object, with one exception: at the leaf level it may transform multiple objects.
+ * Examples of violating items: 
+   - capability: Instructional Delivery
+   - capability: Academic Advising
+   - capability: Pastoral Care Coordination
+   - capability: Opportunity Identification
+   - capability: Research Execution
+
+[!!] C7 - Object Relevance: 5/15 (33.33%)
+----------------------------------------------------------------------
+ * Statement: Each business object must be transformed by exactly one business capability, with one exception: at the leaf level, an object may be transformed by multiple capabilities.
+ * Examples of violating items: 
+   - business-object: Academic Portfolio
+   - business-object: Research Capacity
+   - business-object: Student Record
+   - business-object: Research Project
+   - business-object: Partner Engagement
+
+[!!] C8 - Capability Purpose: 4/39 (10.26%)
+----------------------------------------------------------------------
+ * Statement: Each capability must either directly realize a value stream stage or support another capability that does.
+ * Examples of violating items: 
+   - capability: Recruitment Marketing
+   - capability: Progression Monitoring
+   - capability: Academic Advising
+   - capability: Pastoral Care Coordination
+
+======================================================================
+
+
+
+EXTRA INFO (NOT FOR FEEDBACK TO LLM):
+ * Elements: 89
+ * Relations: 144
+ * Levels: 0, 1, 2
+ * Cross-Stream Utilization Index: 0.9
+ * Coherence Violations: 45/219 (20.55%)

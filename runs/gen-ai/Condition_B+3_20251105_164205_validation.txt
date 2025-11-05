@@ -1,0 +1,57 @@
+======================================================================
+          ARCHITECTURAL COHERENCE VALIDATION REPORT
+======================================================================
+
+OVERALL STATUS: FAILED
+
+VALIDATION SUMMARY:
+  - Total Violations: 30/621 (4.83%)
+  - FAILED Rules: C4, C7, C9
+  - PASSED Rules: C0, C1, C2, C3, C5, C6, C8
+
+NOTE: If C0, C1 or C2 fails, the results become unreliable.
+
+----------------------------------------------------------------------
+                   DETAILED VIOLATION ANALYSIS
+----------------------------------------------------------------------
+
+[!!] C4 - Upward coherence: 12/76 (15.79%)
+----------------------------------------------------------------------
+ * Statement: A non-hierarchical relationship between two elements requires a corresponding relationship between their parents (if any), with one exception: the relationship does not need to be propagated if the parent elements are both primary capabilities within the same top-level value stream.
+ * Examples of violating items: 
+   - serving-relationship: (Quality & Accreditation Management) --> (Cultivate Research Excellence)
+   - serving-relationship: (Research Infrastructure Management) --> (Deliver Research Project)
+   - serving-relationship: (Progression Monitoring) --> (Deliver Instruction & Support)
+   - serving-relationship: (Partner Relationship Management) --> (Cultivate Research Excellence)
+   - serving-relationship: (Relationship Nurturing) --> (Manage Partnership)
+
+[!!] C7 - Object Relevance: 9/35 (25.71%)
+----------------------------------------------------------------------
+ * Statement: Each business object must be transformed by exactly one business capability, with one exception: at the leaf level, an object may be transformed by multiple capabilities.
+ * Examples of violating items: 
+   - business-object: Academic Program
+   - business-object: Student Qualification
+   - business-object: Degree Certificate
+   - business-object: Publication Record
+   - business-object: Intellectual Property
+
+[!!] C9 - Traceability: 9/35 (25.71%)
+----------------------------------------------------------------------
+ * Statement: Each value stream stage must be realized by exactly one capability.
+ * Examples of violating items: 
+   - value-stream: Program Design & Approval
+   - value-stream: Program Quality Management
+   - value-stream: Establish Research Foundations
+   - value-stream: Cultivate Research Excellence
+   - value-stream: Foster Research Collaboration
+
+======================================================================
+
+
+
+EXTRA INFO (NOT FOR FEEDBACK TO LLM):
+ * Elements: 109
+ * Relations: 180
+ * Levels: 0, 1, 2
+ * Cross-Stream Utilization Index: 1.1
+ * Coherence Violations: 30/260 (11.54%)

@@ -1,0 +1,83 @@
+======================================================================
+          ARCHITECTURAL COHERENCE VALIDATION REPORT
+======================================================================
+
+OVERALL STATUS: FAILED
+
+VALIDATION SUMMARY:
+  - Total Violations: 93/405 (22.96%)
+  - FAILED Rules: C3, C4, C6, C7, C8, C9
+  - PASSED Rules: C0, C1, C2, C5
+
+NOTE: If C0, C1 or C2 fails, the results become unreliable.
+
+----------------------------------------------------------------------
+                   DETAILED VIOLATION ANALYSIS
+----------------------------------------------------------------------
+
+[!!] C3 - Consistent refinement depth: 1/46 (2.17%)
+----------------------------------------------------------------------
+ * Statement: All leaf elements (elements without children) must have the same number of ancestors.
+ * Examples of violating items: 
+   - value-stream: Develop & Sustain Research Capacity
+
+[!!] C4 - Upward coherence: 30/31 (96.77%)
+----------------------------------------------------------------------
+ * Statement: A non-hierarchical relationship between two elements requires a corresponding relationship between their parents (if any), with one exception: the relationship does not need to be propagated if the parent elements are both primary capabilities within the same top-level value stream.
+ * Examples of violating items: 
+   - serving-relationship: (Curriculum Design) --> (Design Curriculum)
+   - serving-relationship: (Accreditation Submission) --> (Secure Accreditation)
+   - serving-relationship: (Quality Auditing) --> (Monitor Program Performance)
+   - serving-relationship: (Curriculum Review) --> (Refine Curriculum)
+   - serving-relationship: (Admissions Processing) --> (Recruit & Admit Student)
+
+[!!] C6 - Capability Impact: 27/36 (75%)
+----------------------------------------------------------------------
+ * Statement: Each business capability must transform exactly one business object, with one exception: at the leaf level it may transform multiple objects.
+ * Examples of violating items: 
+   - capability: Academic Program Management
+   - capability: Research Management
+   - capability: Student Management
+   - capability: Education Delivery
+   - capability: Engagement Management
+
+[!!] C7 - Object Relevance: 6/14 (42.86%)
+----------------------------------------------------------------------
+ * Statement: Each business object must be transformed by exactly one business capability, with one exception: at the leaf level, an object may be transformed by multiple capabilities.
+ * Examples of violating items: 
+   - business-object: University Knowledge Asset
+   - business-object: University Engagement
+   - business-object: Academic Asset
+   - business-object: Research Asset
+   - business-object: Student Engagement
+
+[!!] C8 - Capability Purpose: 16/36 (44.44%)
+----------------------------------------------------------------------
+ * Statement: Each capability must either directly realize a value stream stage or support another capability that does.
+ * Examples of violating items: 
+   - capability: Academic Program Management
+   - capability: Research Management
+   - capability: Student Management
+   - capability: Education Delivery
+   - capability: Engagement Management
+
+[!!] C9 - Traceability: 13/29 (44.83%)
+----------------------------------------------------------------------
+ * Statement: Each value stream stage must be realized by exactly one capability.
+ * Examples of violating items: 
+   - value-stream: Develop & Maintain Academic Portfolio
+   - value-stream: Develop & Sustain Research Capacity
+   - value-stream: Deliver Education & Student Experience
+   - value-stream: Execute Funded Research
+   - value-stream: Deliver Societal & Industry Impact
+
+======================================================================
+
+
+
+EXTRA INFO (NOT FOR FEEDBACK TO LLM):
+ * Elements: 79
+ * Relations: 98
+ * Levels: 0, 1, 2
+ * Cross-Stream Utilization Index: 0.7
+ * Coherence Violations: 92/146 (63.01%)
