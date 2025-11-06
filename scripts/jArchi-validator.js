@@ -151,7 +151,6 @@ const report = {
         C0: {
             name: 'Valid level',
             statement: 'Each element must be assigned a level that corresponds to its number of ancestors.',
-            rationale: "A correct 'Level' property for each element makes it easier to validate the model.",
             type: false // false if the rule concerns only one element type, true if it concerns coherence between submodels
             // Added later: opportunityCount, violationCount, examples
         },
@@ -188,19 +187,16 @@ const report = {
         C7: {
             name: 'Object Relevance',
             statement: 'Each business object must be transformed by exactly one business capability, with one exception: at the leaf level, an object may be transformed by multiple capabilities.',
-            rationale: "This ensures clear relevancy and accountability for the object in value-creating activities. The exception at the leaf-level prevents the modeler from having to identify overly detailed object lifecycle stages that would otherwise make the model unrecognizable.",
             coherence: true
         },
         C8: {
             name: 'Capability Purpose',
             statement: 'Each capability must either directly realize a value stream stage or support another capability that does.',
-            rationale: 'This guarantees that all potential is ultimately linked to a value-creating purpose.',
             coherence: true
         },
         C9: {
             name: 'Traceability',
             statement: 'Each value stream stage must be realized by exactly one capability.',
-            rationale: 'This constraint ensures traceability and governability. It establishes a clear, unambiguous link from value-creating action back to the accountable capability.',
             coherence: true
         }
     },

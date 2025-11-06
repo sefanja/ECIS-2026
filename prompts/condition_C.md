@@ -1,26 +1,5 @@
 <!-- INSERT HEADER.MD -->
 
-### Step 6: Formalize All Relationships for Output
-
-1. **Define Base Relationships (L2):** Based on the previous steps, define all L2 relationships:
-   * `AssociationRelationship`: From an L2 `Capability` to the L2 `BusinessObject` it has custodianship over (from Step 5.1).
-   * `ServingRelationship` (Manifestation): From an L2 `Capability` to the L2 `ValueStream` stage it manifests (from Step 1.2).
-   * `ServingRelationship` (Support): From a provider L2 `Capability` to a consumer L2 `Capability` (from Step 2).
-2. **Define Composition Relationships:** Formally define all parent-child links in the three hierarchies (`Capability`, `BusinessObject`, `ValueStream`) by creating `CompositionRelationship`s.
-3. **Construct All Aggregate Relationships:** You will now construct the complete set of L1 and L0 relationships. **Do not invent any new relationships.** The higher-level relationships are created *exclusively* by applying the following mechanical procedure:
-   * **Phase A: Construct L1 Relationships.**
-     * Start with an empty set of L1 relationships.
-       * For **every L2 relationship** you defined in Step 6.1, identify the L1 parent of its source and the L1 parent of its target.
-       * If these L1 parents are not the same element, add a corresponding relationship of the same type to your set of L1 relationships. Avoid adding duplicates.
-     * **Phase B: Construct L0 Relationships.**
-       * Start with an empty set of L0 relationships.
-       * For **every L1 relationship** in the set you just constructed in Phase A, identify the L0 parent of its source and the L0 parent of its target.
-       * If these L0 parents are not the same element, add a corresponding relationship of the same type to your set of L0 relationships. Avoid adding duplicates.
-4. **Mandatory Verification:** Prove you have applied the derivation rule correctly by providing one concrete example for **each** of the three main relationship patterns.
-   * **A. Capability Support:** Select one L2 `ServingRelationship` from a provider capability to a consumer capability. State the L1 parents of both, and then state the derived L1 `ServingRelationship` that must exist.
-   * **B. Capability-Object:** Select one L2 `AssociationRelationship`. State the L1 parents of the source and target, and then state the derived L1 `AssociationRelationship` that must exist.
-   * **C. Capability-ValueStream:** Select one L2 `ServingRelationship` from a capability to a value stream stage. State the L1 parents of both, and then state the derived L1 `ServingRelationship` that must exist.
-
 ## Part 2: Modeling Procedure
 
 **Core Principle: Consistency by Construction**
@@ -103,59 +82,25 @@ For each L0 `ValueStream`, you will now group its L2 stages into L1 stages. This
    * **B. Capability-Object:** Select one L2 `AssociationRelationship`. State the L1 parents of the source and target, and then state the derived L1 `AssociationRelationship` that must exist.
    * **C. Capability-ValueStream:** Select one L2 `ServingRelationship` from a capability to a value stream stage. State the L1 parents of both, and then state the derived L1 `ServingRelationship` that must exist.
 
-## Part 3: Output Specifications
+### Step 6: Formalize All Relationships for Output
 
-Generate the output as three separate code blocks for `elements.csv`, `relations.csv`, and `properties.csv`. The format must be standard CSV with headers, comma separators, and all text values in double quotes.
-
-**1. `elements.csv` Table**
-
-| Column          | Content                                                                      |
-| :-------------- | :--------------------------------------------------------------------------- |
-| `ID`            | A unique identifier for the element.                                         |
-| `Type`          | The element type. **Use only:** `ValueStream`, `Capability`, `BusinessObject`. |
-| `Name`          | The human-readable name of the element.                                      |
-| `Documentation` | A concise description of the element's purpose.                              |
-
-**2. `relations.csv` Table**
-
-| Column           | Content                                                                                      |
-| :--------------- | :------------------------------------------------------------------------------------------- |
-| `ID`             | Leave empty.                                                                                 |
-| `Type`           | The ArchiMate relationship type. **Use only:** `CompositionRelationship`, `ServingRelationship`, `AssociationRelationship`. |
-| `Name`           | Leave empty.                                                                                 |
-| `Documentation`  | Leave empty.                                                                                 |
-| `Source`         | The `ID` of the source element.                                                              |
-| `Target`         | The `ID` of the target element.                                                              |
-| `Specialization` | Leave empty.                                                                                 |
-
-### Usage Rules for Relationship Types
-
-To ensure correctness, you **must** adhere to the following rules when creating relations. No other combinations are permitted.
-
-* **`CompositionRelationship`**: Used exclusively for parent-child relationships within the same hierarchy.
-  * Source Type: `Capability`, Target Type: `Capability`
-  * Source Type: `ValueStream`, Target Type: `ValueStream`
-  * Source Type: `BusinessObject`, Target Type: `BusinessObject`
-
-* **`ServingRelationship`**: Used for two specific purposes.
-  * Use 1 (Manifestation): To show that a capability is manifested as value stream (stage).
-    * Source Type: `Capability`, Target Type: `ValueStream`
-  * Use 2 (Support): To show that one capability provides support to another.
-    * Source Type: `Capability`, Target Type: `Capability`
-
-* **`AssociationRelationship`**: Used exclusively to show that a capability has custodianship over a business object.
-  * Source Type: `Capability`, Target Type: `BusinessObject`
-
-**3. `properties.csv` Table and Rules**
-
-The `properties.csv` file must contain `"ID", "Key", "Value"`. Apply the following rules rigorously:
-
-* **Rule 1 (All Elements):** Every single element from `elements.csv` must have these two properties:
-  * A property with `Key` = "Level" and `Value` = the element's hierarchy level (`0`, `1`, or `2`).
-* **Rule 2 (L0 ValueStreams):** Every L0 `ValueStream` element must have these **additional** properties:
-  * A property with `Key` = "Value Proposition" and `Value` = the full description of the originating Value Proposition.
-  * A property with `Key` = "Value Stream Pattern" and `Value` = the chosen value (`MTS`, `ATO`, or `ETO`).
-* **Rule 3 (L2 ValueStreams):** Every L2 `ValueStream` element must have one **additional** property:
-  * A property with `Key` = "Sequence" and `Value` = a number indicating its sequential position within its parent L0 `ValueStream` (starting from "1" for each stream).
+1. **Define Base Relationships (L2):** Based on the previous steps, define all L2 relationships:
+   * `AssociationRelationship`: From an L2 `Capability` to the L2 `BusinessObject` it has custodianship over (from Step 5.1).
+   * `ServingRelationship` (Manifestation): From an L2 `Capability` to the L2 `ValueStream` stage it manifests (from Step 1.2).
+   * `ServingRelationship` (Support): From a provider L2 `Capability` to a consumer L2 `Capability` (from Step 2).
+2. **Define Composition Relationships:** Formally define all parent-child links in the three hierarchies (`Capability`, `BusinessObject`, `ValueStream`) by creating `CompositionRelationship`s.
+3. **Construct All Aggregate Relationships:** You will now construct the complete set of L1 and L0 relationships. **Do not invent any new relationships.** The higher-level relationships are created *exclusively* by applying the following mechanical procedure:
+   * **Phase A: Construct L1 Relationships.**
+     * Start with an empty set of L1 relationships.
+       * For **every L2 relationship** you defined in Step 6.1, identify the L1 parent of its source and the L1 parent of its target.
+       * If these L1 parents are not the same element, add a corresponding relationship of the same type to your set of L1 relationships. Avoid adding duplicates.
+     * **Phase B: Construct L0 Relationships.**
+       * Start with an empty set of L0 relationships.
+       * For **every L1 relationship** in the set you just constructed in Phase A, identify the L0 parent of its source and the L0 parent of its target.
+       * If these L0 parents are not the same element, add a corresponding relationship of the same type to your set of L0 relationships. Avoid adding duplicates.
+4. **Mandatory Verification:** Prove you have applied the derivation rule correctly by providing one concrete example for **each** of the three main relationship patterns.
+   * **A. Capability Support:** Select one L2 `ServingRelationship` from a provider capability to a consumer capability. State the L1 parents of both, and then state the derived L1 `ServingRelationship` that must exist.
+   * **B. Capability-Object:** Select one L2 `AssociationRelationship`. State the L1 parents of the source and target, and then state the derived L1 `AssociationRelationship` that must exist.
+   * **C. Capability-ValueStream:** Select one L2 `ServingRelationship` from a capability to a value stream stage. State the L1 parents of both, and then state the derived L1 `ServingRelationship` that must exist.
 
 <!-- INSERT FOOTER.MD -->
