@@ -171,7 +171,7 @@ const report = {
         },
         C4: {
             name: 'Upward coherence',
-            statement: 'A non-hierarchical relationship between two elements requires a corresponding relationship between their parents (if any), with one exception: the relationship does not need to be propagated if the parent elements are both primary capabilities within the same top-level value stream.',
+            statement: 'A non-hierarchical relationship between two elements requires a corresponding relationship between their parents (if any), provided the parents are distinct and with one exception: the relationship does not need to be propagated if the parent elements are both primary capabilities within the same top-level value stream.',
             coherence: true
         },
         C5: {
@@ -197,6 +197,11 @@ const report = {
         C9: {
             name: 'Traceability',
             statement: 'Each value stream stage must be realized by exactly one capability.',
+            coherence: true
+        },
+        C10: {
+            name: 'Exclusive Manifestation',
+            statement: 'Each capability may manifest only once as primary per top-level value stream, with an exception for the leaf-level.',
             coherence: true
         }
     },
@@ -334,10 +339,21 @@ compliant = space.filter(supportsValueStream);
 updateReport('C8', space, compliant);
 
 
-// --- C9: Traceability (Exactly One Realizer for Stages) ---
+// --- C9: Traceability (Exactly One Capability for Stages) ---
 space = $('value-stream');
 compliant = space.filter(e => $(e).inRels('serving-relationship').sourceEnds('capability').size() === 1);
 updateReport('C9', space, compliant);
+
+
+// --- C10: Exclusive Manifestation (Max Once as Primary per L0 Value Stream) ---
+space = $('capability').filter(
+    e => getChildren(e).size() > 0 // exclude the leaf-level
+    && $(e).outRels('serving-relationship').targetEnds('value-stream').size() > 0 // at least one primary manifestation
+);
+compliant = space.filter(e =>
+    $(e).outRels('serving-relationship').targetEnds('value-stream').size()
+    === getDirectlySupportedTopValueStreams(e).size);
+updateReport('C10', space, compliant);
 
 
 // ====================================================================
@@ -388,8 +404,9 @@ console.log();
 console.log('======================================================================');
 
 
+// Utilization of capabilities across value streams, that manifest at least once as primary
 const utilization = [];
-$('capability').each(e => {
+$('capability').filter(e => $(e).outRels('serving-relationship').targetEnds('value-stream').size() > 0).each(e => {
     const topVSIDs = getSupportedTopValueStreams(e);
     utilization.push(topVSIDs.size);
 });
