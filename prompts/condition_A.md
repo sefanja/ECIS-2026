@@ -13,42 +13,38 @@ You are an experienced business architect tasked with creating a business archit
 * **Key Strategic Drivers & Basis of Competition:** On what basis do organizations in this sector compete? Consider factors like reputation, innovation, efficiency, customer satisfaction, or societal impact. Name the 2-3 most important ones.
 * **Dominant Environmental Factors:** Describe the context in which the sector operates. Consider laws and regulations, public accountability, technological trends, or funding models (e.g., public funds).
 
-### Strategic Foundation
-
-1. Identify **2-3 primary, external `Customer Segments`** for the defined sector.
-2. For **each** `Customer Segment`, describe the core `Value Proposition` it receives from the organization. Focus on the ultimate value for the customer.
-3. Present the result as a list where each `Customer Segment` is paired with its `Value Proposition(s)`.
-
 ## Part 2: Modeling Procedure
 
 ### Step 1: The Goal and Guiding Principles
 
 Your primary goal is to create a coherent architectural model for the core business domain of the specified sector.
 
-1. **Principle of Reusability:** You must develop a single, canonical set of reusable capabilities.
+1. **Principle of Reusability:** You must develop a single, canonical set of capabilities that can be reused for multiple value streams.
 2. **Principle of Grounding:** After developing the core architecture, you will ground it by mapping it to the value streams defined in Part 1 to ensure nothing is missing.
 
 ### Step 2: Develop Capability and Object Catalogs
 
-1. **Develop the Business Capability Catalog:** Develop a detailed but consolidated and reusable set of `Capabilities` for the sector. Structure these into a logical hierarchy.
+1. **Develop the Business Capability Catalog:** Develop a detailed set of `Capabilities` for the sector. Structure these into a logical hierarchy.
    * **Core Domain Mandate:** You **must** focus exclusively on **core** capabilities that are intrinsic to the sector's **primary value creation**. Strictly avoid defining generic, cross-sector administrative capabilities, even if they seem necessary. This includes, but is not limited to, capabilities for managing general IT systems, human resources, legal affairs, or financial accounting.
-2. **Develop the Object Catalog:** Define a detailed but consolidated and reusable set of `BusinessObject`, again focusing on the core domain of the sector. Structure these into a hierarchy.
+2. **Develop the Object Catalog:** Define a detailed set of `BusinessObject`, again focusing on the core domain of the sector. Structure these into a hierarchy.
 
 ### Step 3: Develop the L0 Value Streams
 
-1. **Define L0 Value Streams using CODP:** Based on the customer segments and their value propositions identified eralier, define the complete set of L0 `ValueStreams`.
+1. Identify **2-3 primary, external `Customer Segments`** for the defined sector.
+2. For **each** `Customer Segment`, describe the core `Value Proposition` it receives from the organization. Focus on the ultimate value for the customer.
+3. **Define L0 Value Streams using CODP:** Based on the customer segments and their value propositions, define the complete set of L0 `ValueStreams`.
    * **Principle:** If the organization creates a standardized, reusable business asset 'to stock' (**Make-to-Stock, MTS**), this is a separate L0 `ValueStream`. The flow triggered by a customer order (**Assemble-to-Order, ATO**) is another.
    * **Litmus Test:** Ask "Does the organization build a core asset *before* any specific customer is known?"
      * **Example:** A software company develops a standard `Platform` (MTS) before a client signs up. Configuring that platform for a new client (ATO) is a separate L0 Value Stream.
    * **Action:** Use this logic to define all internal asset-creation streams (MTS) and all customer-facing delivery streams (ATO/ETO).
-2. **Characterize All Value Streams:** For every L0 `ValueStream` defined above:
+4. **Characterize All Value Streams:** For every L0 `ValueStream` defined above:
     * Assign a `Value Stream Pattern (CODP)`: Choose one of `ETO`, `ATO`, or `MTS`.
     * Use the 'deepest' pattern (`ETO` > `ATO` > `MTS`) that represents a typical case for the sector.
-3. Present the result as a list: `[L0 Value Stream Name, Description, Originating VP, Value Stream Pattern]`.
+5. Present the result as a list: `[L0 Value Stream Name, Description, Originating VP, Value Stream Pattern]`.
 
 ### Step 4: Decompose and Map Architecture to Value Streams
 
-1. **Decompose Value Streams:** Decompose the top-level `ValueStreams` into stages.
+1. **Decompose Value Streams:** Decompose the top-level `ValueStreams` into stages. Determine the number of stages required to narrate the complete and highly granular value creation process.
 2. **Define Mappings:** Map the `Capabilities` to the `ValueStream` stages that manifest them, and to the `BusinessObjects` they have custodianship over. Define support relationships between capabilities as needed.
 
 ### Step 4: Prepare for Final Output

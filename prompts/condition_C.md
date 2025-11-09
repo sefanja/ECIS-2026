@@ -13,12 +13,6 @@ You are an experienced business architect tasked with creating a business archit
 * **Key Strategic Drivers & Basis of Competition:** On what basis do organizations in this sector compete? Consider factors like reputation, innovation, efficiency, customer satisfaction, or societal impact. Name the 2-3 most important ones.
 * **Dominant Environmental Factors:** Describe the context in which the sector operates. Consider laws and regulations, public accountability, technological trends, or funding models (e.g., public funds).
 
-### Strategic Foundation
-
-1. Identify **2-3 primary, external `Customer Segments`** for the defined sector.
-2. For **each** `Customer Segment`, describe the core `Value Proposition` it receives from the organization. Focus on the ultimate value for the customer.
-3. Present the result as a list where each `Customer Segment` is paired with its `Value Proposition(s)`.
-
 ## Part 2: Modeling Procedure
 
 **Core Principle: Consistency by Construction**
@@ -36,18 +30,25 @@ You will now apply this procedure to create the detailed architectural model for
    * **Quality Criteria:**
      * Determine a number of L1 `Capabilities` (between 3 and 7) that accurately reflects the complexity of the sector described in Part 1.
      * The L1 Capabilities must be **MECE** (Mutually Exclusive and Collectively Exhaustive): they should minimize overlap in scope while collectively covering the organization's entire value chain.
+     * **Mandatory Classification:** Each defined L1 `Capability` must be explicitly assigned to one, and only one, of the following three mutually exclusive categories, thereby ensuring the clear separation of external exchange from internal core activities:
+       1. **Value Exchange with Value Suppliers** (Supply Chain activities)
+       2. **Core Value Transformation** (The company's unique value-add activities)
+       3. **Value Exchange with Value Receivers** (Customer interaction, billing, contracting, etc.)
+3. **Present L1 Capabilities:** Explicitly list all L1 `Capabilities` with their classification.
 
 ### Step 2: Define the L0 Value Streams
 
-1. **Define L0 Value Streams using CODP:** Based on the customer segments and their value propositions identified eralier, define the complete set of L0 `ValueStreams`.
+1. Identify **2-3 primary, external `Customer Segments`** for the defined sector.
+2. For **each** `Customer Segment`, describe the core `Value Proposition` it receives from the organization. Focus on the ultimate value for the customer.
+3. **Define L0 Value Streams using CODP:** Based on the customer segments and their value propositions, define the complete set of L0 `ValueStreams`.
    * **Principle:** If the organization creates a standardized, reusable business asset 'to stock' (**Make-to-Stock, MTS**), this is a separate L0 `ValueStream`. The flow triggered by a customer order (**Assemble-to-Order, ATO**) is another.
    * **Litmus Test:** Ask "Does the organization build a core asset *before* any specific customer is known?"
      * **Example:** A software company develops a standard `Platform` (MTS) before a client signs up. Configuring that platform for a new client (ATO) is a separate L0 Value Stream.
    * **Action:** Use this logic to define all internal asset-creation streams (MTS) and all customer-facing delivery streams (ATO/ETO).
-2. **Characterize All Value Streams:** For every L0 `ValueStream` defined above:
+4. **Characterize All Value Streams:** For every L0 `ValueStream` defined above:
     * Assign a `Value Stream Pattern (CODP)`: Choose one of `ETO`, `ATO`, or `MTS`.
     * Use the 'deepest' pattern (`ETO` > `ATO` > `MTS`) that represents a typical case for the sector.
-3. Present the result as a list: `[L0 Value Stream Name, Description, Originating VP, Value Stream Pattern]`.
+5. Present the result as a list: `[L0 Value Stream Name, Description, Originating VP, Value Stream Pattern]`.
 
 ### Step 3: Discover L2 Capabilities and Value Stream Stages Iteratively
 
@@ -104,26 +105,17 @@ For each L0 `ValueStream`, you will now group its L2 stages into L1 stages. This
    * `ServingRelationship` (Manifestation): From an L2 `Capability` to the L2 `ValueStream` stage it manifests (from Step 3.3).
    * `ServingRelationship` (Support): From a provider L2 `Capability` to a consumer L2 `Capability` (from Steps 3.4 and 3.5).
 2. **Define Composition Relationships:** Formally define all parent-child links in the three hierarchies (`Capability`, `BusinessObject`, `ValueStream`) by creating `CompositionRelationship`s.
-3. **Construct All Aggregate Relationships:** You will now construct the complete set of L1 and L0 relationships. **Do not invent any new relationships.** The higher-level relationships are created *exclusively* by applying the following mechanical procedure:
-   * **Phase A: Construct L1 Relationships.**
-     * Start with an empty set of L1 relationships.
-       * For **every L2 relationship** you defined in Step 6.1, identify the L1 parent of its source and the L1 parent of its target.
-       * If these L1 parents are not the same element, add a corresponding relationship of the same type to your set of L1 relationships. Avoid adding duplicates.
-     * **Phase B: Construct L0 Relationships.**
-       * Start with an empty set of L0 relationships.
-       * For **every L1 relationship** in the set you just constructed in Phase A, identify the L0 parent of its source and the L0 parent of its target.
-       * If these L0 parents are not the same element, add a corresponding relationship of the same type to your set of L0 relationships. Avoid adding duplicates.
-4. **Explicitly Present All Aggregated Relationships (Mandatory Checkpoint):**
-   To ensure upward coherence, you must now explicitly list the complete, unique set of all aggregated non-composition relationships derived in Step 6.3 (Phases A and B). **These derived relationships must be included in the final `relations.csv` output.**
-   1. **Present All L1 Derived Relationships:** A unique list of all derived L1 `ServingRelationship`s and L1 `AssociationRelationship`s.
-   2. **Present All L0 Derived Relationships:** A unique list of all derived L0 `ServingRelationship`s and L0 `AssociationRelationship`s.
-   *Your response must now contain this list before proceeding to Step 6.4.*
-5. **Mandatory Verification:** Prove you have applied the derivation rule correctly by providing one concrete example for **each** of the three main relationship patterns.
-   * **A. Capability Support:** Select one L2 `ServingRelationship` from a provider capability to a consumer capability. State the L1 parents of both, and then state the derived L1 `ServingRelationship` that must exist.
-   * **B. Capability-Object:** Select one L2 `AssociationRelationship`. State the L1 parents of the source and target, and then state the derived L1 `AssociationRelationship` that must exist.
-   * **C. Capability-ValueStream:** Select one L2 `ServingRelationship` from a capability to a value stream stage. State the L1 parents of both, and then state the derived L1 `ServingRelationship` that must exist.
+3. **Derive L1 Relationships:** Based on step 6.1, derive all L2 relationships:
+   * `AssociationRelationship`: For each `AssociationRelationship` from an L2 `Capability` to an L2 `BusinessObject`, create a corresponding relationship between their L1 parents, provided the L1 relationship does not yet exist.
+   * `ServingRelationship` (Manifestation): For each `ServingRelationship` from an L2 `Capability` to the L2 `ValueStream`, create a corresponding relationship between their L1 parents, provided the L1 relationship does not yet exist.
+   * `ServingRelationship` (Support): For each `ServingRelationship` from a provider L2 `Capability` to a consumer L2 `Capability`, create a corresponding relationship between their L1 parents, provided those parents are distinct and the L1 relationship does not yet exist.
+4. **Create L0 Relationships:** Create an `AssociationRelationship` from the single L0 `Capability` to the single L0 `BusinessObject` and `ServingRelationships` to all L0 `ValueStreams`.
+5. **Explicitly Present All Derived Relationships (Mandatory Checkpoint):**
+   To ensure upward coherence, you must now explicitly list the complete, unique set of all non-composition L1 relationships created in Steps 6.3.
 
 ## Part 3: Output Specifications
+
+**Instruction:** Your response must now consist of ONLY the three requested CSV code blocks. DO NOT include any further text, headers, or explanations outside of the code blocks themselves.
 
 Generate the output as three separate code blocks for `elements.csv`, `relations.csv`, and `properties.csv`. The format must be standard CSV with headers, comma separators, and all text values in double quotes.
 

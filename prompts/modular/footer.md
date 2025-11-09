@@ -1,5 +1,7 @@
 ## Part 3: Output Specifications
 
+**Instruction:** Your response must now consist of ONLY the three requested CSV code blocks. DO NOT include any further text, headers, or explanations outside of the code blocks themselves.
+
 Generate the output as three separate code blocks for `elements.csv`, `relations.csv`, and `properties.csv`. The format must be standard CSV with headers, comma separators, and all text values in double quotes.
 
 **1. `elements.csv` Table**
