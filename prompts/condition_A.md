@@ -24,9 +24,9 @@ Your primary goal is to create a coherent architectural model for the core busin
 
 ### Step 2: Develop Capability and Object Catalogs
 
-1. **Develop the Business Capability Catalog:** Develop a detailed set of `Capabilities` for the sector. Structure these into a logical hierarchy.
+1. **Develop the Business Capability Catalog:** Develop a highly detailed set of `Capabilities` for the sector. Structure these into a logical hierarchy.
    * **Core Domain Mandate:** You **must** focus exclusively on **core** capabilities that are intrinsic to the sector's **primary value creation**. Strictly avoid defining generic, cross-sector administrative capabilities, even if they seem necessary. This includes, but is not limited to, capabilities for managing general IT systems, human resources, legal affairs, or financial accounting.
-2. **Develop the Object Catalog:** Define a detailed set of `BusinessObject`, again focusing on the core domain of the sector. Structure these into a hierarchy.
+2. **Develop the Object Catalog:** Define a highly detailed set of `BusinessObject`, again focusing on the core domain of the sector. Structure these into a hierarchy.
 
 ### Step 3: Develop the L0 Value Streams
 
@@ -44,16 +44,20 @@ Your primary goal is to create a coherent architectural model for the core busin
 
 ### Step 4: Decompose and Map Architecture to Value Streams
 
-1. **Decompose Value Streams:** Decompose the top-level `ValueStreams` into stages. Determine the number of stages required to narrate the complete and highly granular value creation process.
-2. **Define Mappings:** Map the `Capabilities` to the `ValueStream` stages that manifest them, and to the `BusinessObjects` they have custodianship over. Define support relationships between capabilities as needed.
+1. **Develop Value Stream Catalog:** Decompose the top-level `ValueStreams` into stages. Determine the number of stages required to narrate the complete and highly granular value creation process.
+2. **Define Architectural Mappings:** Create mappings between the elements from the catalogs to show how they relate to each other:
+   * Map `ValueStreams` (and stages) to the `Capabilities` that realize them.
+   * Map `Capabilities` to the `BusinessObjects` they modify.
 
-### Step 4: Prepare for Final Output
+### Step 5: Prepare for Final Output
 
 1. Consolidate all final elements and relationships.
 2. Assign a `Level` property to all elements based on their position in their respective hierarchies (top-level elements are Level 0, their children are Level 1, and so on).
 3. Assign a `Sequence` property to the decomposed `ValueStream` elements.
 
 ## Part 3: Output Specifications
+
+**Instruction:** Your response must now consist of ONLY the three requested CSV code blocks. DO NOT include any further text, headers, or explanations outside of the code blocks themselves.
 
 Generate the output as three separate code blocks for `elements.csv`, `relations.csv`, and `properties.csv`. The format must be standard CSV with headers, comma separators, and all text values in double quotes.
 
@@ -64,7 +68,7 @@ Generate the output as three separate code blocks for `elements.csv`, `relations
 | `ID`            | A unique identifier for the element.                                         |
 | `Type`          | The element type. **Use only:** `ValueStream`, `Capability`, `BusinessObject`. |
 | `Name`          | The human-readable name of the element.                                      |
-| `Documentation` | A concise description of the element's purpose.                              |
+| `Documentation` | Leave empty.                                                                 |
 
 **2. `relations.csv` Table**
 
@@ -88,12 +92,10 @@ To ensure correctness, you **must** adhere to the following rules when creating 
   * Source Type: `BusinessObject`, Target Type: `BusinessObject`
 
 * **`ServingRelationship`**: Used for two specific purposes.
-  * Use 1 (Manifestation): To show that a capability is manifested as value stream (stage).
-    * Source Type: `Capability`, Target Type: `ValueStream`
-  * Use 2 (Support): To show that one capability provides support to another.
-    * Source Type: `Capability`, Target Type: `Capability`
+  * Source Type: `Capability`, Target Type: `ValueStream`
+  * Source Type: `Capability`, Target Type: `Capability`
 
-* **`AssociationRelationship`**: Used exclusively to show that a capability has custodianship over a business object.
+* **`AssociationRelationship`**: Used exclusively to relate capabilities to business objects.
   * Source Type: `Capability`, Target Type: `BusinessObject`
 
 **3. `properties.csv` Table and Rules**
@@ -101,9 +103,7 @@ To ensure correctness, you **must** adhere to the following rules when creating 
 The `properties.csv` file must contain `"ID", "Key", "Value"`. Apply the following rules rigorously:
 
 * **Rule 1 (All Elements):** Every single element from `elements.csv` must have these two properties:
-  * A property with `Key` = "Level" and `Value` = the element's hierarchy level (`0`, `1`, or `2`).
-* **Rule 2 (L0 ValueStreams):** Every L0 `ValueStream` element must have these **additional** properties:
+  * A property with `Key` = "Level" and `Value` = the element's hierarchy level (starting at `0`).
+* **Rule 2 (L0 ValueStreams):** Every top-level `ValueStream` element must have these **additional** properties:
   * A property with `Key` = "Value Proposition" and `Value` = the full description of the originating Value Proposition.
-  * A property with `Key` = "Value Stream Pattern" and `Value` = the chosen value (`MTS`, `ATO`, or `ETO`).
-* **Rule 3 (L2 ValueStreams):** Every L2 `ValueStream` element must have one **additional** property:
-  * A property with `Key` = "Sequence" and `Value` = a number indicating its sequential position within its parent L0 `ValueStream` (starting from "1" for each stream).
+  * A property with `Key` = "Value Stream Pattern" and `Value` = the chosen value stream pattern (`MTS`, `ATO`, or `ETO`).

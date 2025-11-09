@@ -1,0 +1,37 @@
+======================================================================
+          ARCHITECTURAL COHERENCE VALIDATION REPORT
+======================================================================
+
+OVERALL STATUS: FAILED
+
+VALIDATION SUMMARY:
+  - Total Violations: 29/630 (4.6%)
+  - FAILED Rules: C5
+  - PASSED Rules: C0, C1, C2, C3, C4, C6, C7, C8, C9, C10
+
+NOTE: If C0, C1 or C2 fails, the results become unreliable.
+
+----------------------------------------------------------------------
+                   DETAILED VIOLATION ANALYSIS
+----------------------------------------------------------------------
+
+[!!] C5 - Downward coherence: 29/39 (74.36%)
+----------------------------------------------------------------------
+ * Statement: A relationship between two parent elements requires that at least one pair of their respective children (if any) is also related.
+ * Examples of violating items: 
+   - serving-relationship: (Research Question Formulation) --> (Knowledge Asset Creation)
+   - serving-relationship: (Study Protocol Design) --> (Knowledge Asset Creation)
+   - serving-relationship: (Research Data Acquisition) --> (Knowledge Asset Creation)
+   - serving-relationship: (Data Analysis) --> (Knowledge Asset Creation)
+   - serving-relationship: (Manuscript Authoring) --> (Knowledge Asset Creation)
+
+======================================================================
+
+
+
+EXTRA INFO (NOT FOR FEEDBACK TO LLM):
+ * Elements: 102
+ * Relations: 184
+ * Levels: 0, 1
+ * Cross-Stream Utilization Index: 1
+ * Coherence Violations: 29/267 (10.86%)

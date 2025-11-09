@@ -59,7 +59,7 @@ Execute the following process for each L0 `ValueStream`. You **must** process th
 
 For each L0 `ValueStream`:
 
-1. **Deconstruct into Stages:** Deconstruct the L0 `ValueStream` into a logical sequence of stages. Choose a number of stages that is sufficient to tell the core but detailed value creation story, focusing on significant milestones. Asign a `Sequence` number to each L2 stage (starting from "1" for each L0 stream).
+1. **Deconstruct into Stages:** Deconstruct the L0 `ValueStream` into a logical sequence of stages. Determine the number of stages required to narrate the complete and highly granular value creation process. Asign a `Sequence` number to each L2 stage (starting from "1" for each L0 stream).
 2. **Ensure Lifecycle Completeness:** For an `ATO` or `ETO` stream, verify that the sequence of stages covers the following logical phases. If not, add the necessary stages:
    * **Engagement & Acquisition:** Initial contact, qualification, and agreement.
      * **Core Value Delivery:** The central activities the customer is paying for.
@@ -67,7 +67,7 @@ For each L0 `ValueStream`:
      * **After-Care & Support:** Post-delivery support and issue resolution.
 3. **Identify Primary Capabilities:** For each L2 `ValueStream` stage, identify the primary L2 `Capability` it manifests. Adhere to the following rules:
    * **Naming Convention:** Adhere to the **Verb-Plural Noun** format (e.g., `Assess Customer Needs`, `Develop New Products`).
-   * **Granularity Rule:** The capability must be generic enough to be potentially reusable in other contexts, but specific enough that it manifests as only **one** L2 stage within the same L0 value stream.
+   * **Granularity Rule:** The capability must be defined as a context-free core competency of the organization, such that it can potentially be reused in other value streams, but specific enough that it manifests as only **one** L2 stage within the same L0 value stream.
      * **Litmus Test:** If you are tempted to assign the same capability to multiple stages of the same L0 value stream (e.g., assigning `Manage Service Requests` to both "Receive Request" and "Fulfill Request"), your capability is too broad. You must define more granular capabilities instead (e.g., `Process Intake Requests` and `Deliver Services`).
    * **Assign one Parent:** Assign the newly created L2 `Capabilities` to **exactly one** L1 `Capability` parent.
 4. **Discover Supporting Capabilities (First Level):** For each primary L2 `Capability` you just identified, list its 1-3 most critical, direct supporting L2 `Capabilities` (or a justified 0). Adhere to the **naming convention** and the following rules:
@@ -79,6 +79,10 @@ For each L0 `ValueStream`:
    * **Assign one Parent:** Assign any newly created L2 `Capabilities` to **exactly one** L1 `Capability` parent.
 5. **Discover Deeper Supporting Capabilities (Second Level):** Now, for each **newly discovered supporting capability** from the previous step, repeat the process: identify its 1-2 most critical supporting L2 `Capabilities` (or a justified 0), adhering to the **naming convention**, **reuse first**, **value-flow direction**, and **core domain mandate** mentioned above.
    * **Assign one Parent:** Assign any newly created L2 `Capabilities` to **exactly one** L1 `Capability` parent.
+6. **Mandatory Output Consolidation Checkpoint:** Before proceeding to Step 4, all discovered elements must be consolidated. This checkpoint does *not* generate a CSV code block. It is a mandatory internal step to ensure completeness before final output generation.
+   1. **Consolidate All Capabilities:** Generate a complete list of all Capabilities (L0, L1, and L2) created in Step 1 and Step 3, including their Parent ID. This canonical list is the definitive source for all `Capability` records in the final `elements.csv`.
+   2. **Consolidate All Value Stream Elements:** Generate a complete list of all `ValueStream` elements (L0, L1, and L2) created in Step 2 and Step 3, including their Parent ID. This canonical list is the definitive source for all `ValueStream` records in the final `elements.csv`.
+   3. **Consolidate All Business Objects:** Generate a complete list of all `BusinessObjects` (L0, L1, and L2) created in Step 5, including their Parent ID. This canonical list is the definitive source for all `BusinessObject` records in the final `elements.csv`.
 
 ### Step 4: Build the Value Stream Hierarchy (Mirroring the Anchor)
 
@@ -92,7 +96,7 @@ For each L0 `ValueStream`, you will now group its L2 stages into L1 stages. This
 
 ### Step 5: Identify and Structure Business Objects (Mirroring the Anchor)
 
-1. **Identify L2 Objects:** For each L2 `Capability`, identify its primary L2 `BusinessObject` it has custodianship over.
+1. **Identify L2 Objects:** For each L2 `Capability`, identify its primary L2 `BusinessObject` it transforms (and has custodianship over).
    * **Valuable Entity Rule:** You must name the actual, valuable entity in the real world (e.g., `Customer Relationship` or `Customer`), not the information *about* it (e.g., `Customer Record`). Focus on business reality, not IT.
 2. **Build the Object Hierarchy:** Create an L0/L1 `BusinessObject` hierarchy that **exactly mirrors** the `Capability` hierarchy.
    * An L1 `BusinessObject` must contain the exact same set of L2 `BusinessObjects` whose corresponding L2 `Capabilities` belong to the same L1 `Capability`.
@@ -101,7 +105,7 @@ For each L0 `ValueStream`, you will now group its L2 stages into L1 stages. This
 ### Step 6: Formalize All Relationships for Output
 
 1. **Define Base Relationships (L2):** Based on the previous steps, define all L2 relationships:
-   * `AssociationRelationship`: From an L2 `Capability` to the L2 `BusinessObject` it has custodianship over (from Step 5.1).
+   * `AssociationRelationship`: From an L2 `Capability` to the L2 `BusinessObject` it transforms (from Step 5.1).
    * `ServingRelationship` (Manifestation): From an L2 `Capability` to the L2 `ValueStream` stage it manifests (from Step 3.3).
    * `ServingRelationship` (Support): From a provider L2 `Capability` to a consumer L2 `Capability` (from Steps 3.4 and 3.5).
 2. **Define Composition Relationships:** Formally define all parent-child links in the three hierarchies (`Capability`, `BusinessObject`, `ValueStream`) by creating `CompositionRelationship`s.
@@ -126,7 +130,7 @@ Generate the output as three separate code blocks for `elements.csv`, `relations
 | `ID`            | A unique identifier for the element.                                         |
 | `Type`          | The element type. **Use only:** `ValueStream`, `Capability`, `BusinessObject`. |
 | `Name`          | The human-readable name of the element.                                      |
-| `Documentation` | A concise description of the element's purpose.                              |
+| `Documentation` | Leave empty.                                                                 |
 
 **2. `relations.csv` Table**
 
@@ -150,12 +154,10 @@ To ensure correctness, you **must** adhere to the following rules when creating 
   * Source Type: `BusinessObject`, Target Type: `BusinessObject`
 
 * **`ServingRelationship`**: Used for two specific purposes.
-  * Use 1 (Manifestation): To show that a capability is manifested as value stream (stage).
-    * Source Type: `Capability`, Target Type: `ValueStream`
-  * Use 2 (Support): To show that one capability provides support to another.
-    * Source Type: `Capability`, Target Type: `Capability`
+  * Source Type: `Capability`, Target Type: `ValueStream`
+  * Source Type: `Capability`, Target Type: `Capability`
 
-* **`AssociationRelationship`**: Used exclusively to show that a capability has custodianship over a business object.
+* **`AssociationRelationship`**: Used exclusively to relate capabilities to business objects.
   * Source Type: `Capability`, Target Type: `BusinessObject`
 
 **3. `properties.csv` Table and Rules**
@@ -163,9 +165,7 @@ To ensure correctness, you **must** adhere to the following rules when creating 
 The `properties.csv` file must contain `"ID", "Key", "Value"`. Apply the following rules rigorously:
 
 * **Rule 1 (All Elements):** Every single element from `elements.csv` must have these two properties:
-  * A property with `Key` = "Level" and `Value` = the element's hierarchy level (`0`, `1`, or `2`).
-* **Rule 2 (L0 ValueStreams):** Every L0 `ValueStream` element must have these **additional** properties:
+  * A property with `Key` = "Level" and `Value` = the element's hierarchy level (starting at `0`).
+* **Rule 2 (L0 ValueStreams):** Every top-level `ValueStream` element must have these **additional** properties:
   * A property with `Key` = "Value Proposition" and `Value` = the full description of the originating Value Proposition.
-  * A property with `Key` = "Value Stream Pattern" and `Value` = the chosen value (`MTS`, `ATO`, or `ETO`).
-* **Rule 3 (L2 ValueStreams):** Every L2 `ValueStream` element must have one **additional** property:
-  * A property with `Key` = "Sequence" and `Value` = a number indicating its sequential position within its parent L0 `ValueStream` (starting from "1" for each stream).
+  * A property with `Key` = "Value Stream Pattern" and `Value` = the chosen value stream pattern (`MTS`, `ATO`, or `ETO`).

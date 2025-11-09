@@ -1,0 +1,36 @@
+======================================================================
+          ARCHITECTURAL COHERENCE VALIDATION REPORT
+======================================================================
+
+OVERALL STATUS: FAILED
+
+VALIDATION SUMMARY:
+  - Total Violations: 4/973 (0.41%)
+  - FAILED Rules: C4
+  - PASSED Rules: C0, C1, C2, C3, C5, C6, C7, C8, C9, C10
+
+NOTE: If C0, C1 or C2 fails, the results become unreliable.
+
+----------------------------------------------------------------------
+                   DETAILED VIOLATION ANALYSIS
+----------------------------------------------------------------------
+
+[!!] C4 - Upward coherence: 4/140 (2.86%)
+----------------------------------------------------------------------
+ * Statement: A non-hierarchical relationship between two elements requires a corresponding relationship between their parents (if any), provided the parents are distinct and with one exception: the relationship does not need to be propagated if the parent elements are both primary capabilities within the same top-level value stream.
+ * Examples of violating items: 
+   - serving-relationship: (Manage Program Information) --> (Market Academic Programs)
+   - serving-relationship: (Recruit Academic Staff) --> (Write Grant Proposals)
+   - serving-relationship: (Ensure Research Compliance) --> (Curate Research Datasets)
+   - serving-relationship: (Assess Research Landscapes) --> (Evaluate Intellectual Property)
+
+======================================================================
+
+
+
+EXTRA INFO (NOT FOR FEEDBACK TO LLM):
+ * Elements: 158
+ * Relations: 297
+ * Levels: 0, 1, 2
+ * Cross-Stream Utilization Index: 1.7
+ * Coherence Violations: 4/390 (1.03%)

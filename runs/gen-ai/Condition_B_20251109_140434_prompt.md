@@ -1,3 +1,6 @@
+# Prompt for Condition_B
+
+```markdown
 # Reference Architecture Design Brief
 
 ## Part 1: Context & Scope
@@ -93,7 +96,7 @@ Generate the output as three separate code blocks for `elements.csv`, `relations
 | `ID`            | A unique identifier for the element.                                         |
 | `Type`          | The element type. **Use only:** `ValueStream`, `Capability`, `BusinessObject`. |
 | `Name`          | The human-readable name of the element.                                      |
-| `Documentation` | Leave empty.                                                                 |
+| `Documentation` | A concise description of the element's purpose.                              |
 
 **2. `relations.csv` Table**
 
@@ -132,3 +135,5 @@ The `properties.csv` file must contain `"ID", "Key", "Value"`. Apply the followi
 * **Rule 2 (L0 ValueStreams):** Every top-level `ValueStream` element must have these **additional** properties:
   * A property with `Key` = "Value Proposition" and `Value` = the full description of the originating Value Proposition.
   * A property with `Key` = "Value Stream Pattern" and `Value` = the chosen value stream pattern (`MTS`, `ATO`, or `ETO`).
+
+```

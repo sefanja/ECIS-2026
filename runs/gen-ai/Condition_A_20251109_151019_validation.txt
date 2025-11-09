@@ -1,0 +1,103 @@
+======================================================================
+          ARCHITECTURAL COHERENCE VALIDATION REPORT
+======================================================================
+
+OVERALL STATUS: FAILED
+
+VALIDATION SUMMARY:
+  - Total Violations: 129/452 (28.54%)
+  - FAILED Rules: C3, C4, C5, C6, C7, C8, C9, C10
+  - PASSED Rules: C0, C1, C2
+
+NOTE: If C0, C1 or C2 fails, the results become unreliable.
+
+----------------------------------------------------------------------
+                   DETAILED VIOLATION ANALYSIS
+----------------------------------------------------------------------
+
+[!!] C3 - Consistent refinement depth: 20/60 (33.33%)
+----------------------------------------------------------------------
+ * Statement: All leaf elements (elements without children) must have the same number of ancestors.
+ * Examples of violating items: 
+   - capability: Grant Identification & Proposal Development
+   - capability: Grant Administration & Compliance
+   - capability: Research Project Management
+   - capability: Laboratory & Facility Management
+   - capability: Research Data Management
+
+[!!] C4 - Upward coherence: 40/40 (100%)
+----------------------------------------------------------------------
+ * Statement: A non-hierarchical relationship between two elements requires a corresponding relationship between their parents (if any), provided the parents are distinct and with one exception: the relationship does not need to be propagated if the parent elements are both primary capabilities within the same top-level value stream.
+ * Examples of violating items: 
+   - serving-relationship: (Student Recruitment & Admissions) --> (Recruit & Admit)
+   - serving-relationship: (Student Advising & Mentorship) --> (Onboard & Advise)
+   - serving-relationship: (Teaching & Learning Delivery) --> (Instruct & Assess)
+   - serving-relationship: (Credentialing & Graduation) --> (Certify & Graduate)
+   - serving-relationship: (Grant Identification & Proposal Development) --> (Identify & Propose)
+
+[!!] C5 - Downward coherence: 17/17 (100%)
+----------------------------------------------------------------------
+ * Statement: A relationship between two parent elements requires that at least one pair of their respective children (if any) is also related.
+ * Examples of violating items: 
+   - serving-relationship: (Student Recruitment & Admissions) --> (Recruit & Admit)
+   - serving-relationship: (Student Advising & Mentorship) --> (Onboard & Advise)
+   - serving-relationship: (Teaching & Learning Delivery) --> (Instruct & Assess)
+   - serving-relationship: (Research Execution & Conduct) --> (Conduct Research)
+   - serving-relationship: (Intellectual Property & Commercialization) --> (Manage & Monitor)
+
+[!!] C6 - Capability Impact: 20/33 (60.61%)
+----------------------------------------------------------------------
+ * Statement: Each business capability must transform exactly one business object, with one exception: at the leaf level it may transform multiple objects.
+ * Examples of violating items: 
+   - capability: Research Management
+   - capability: Research Funding & Grant Management
+   - capability: Laboratory & Facility Management
+   - capability: Research Ethics & Integrity Oversight
+   - capability: Intellectual Property & Commercialization
+
+[!!] C7 - Object Relevance: 6/22 (27.27%)
+----------------------------------------------------------------------
+ * Statement: Each business object must be transformed by exactly one business capability, with one exception: at the leaf level, an object may be transformed by multiple capabilities.
+ * Examples of violating items: 
+   - business-object: Research Asset
+   - business-object: Knowledge Product
+   - business-object: Stakeholder
+   - business-object: Researcher
+   - business-object: Research Sponsor
+
+[!!] C8 - Capability Purpose: 18/33 (54.55%)
+----------------------------------------------------------------------
+ * Statement: Each capability must either directly realize a value stream stage or support another capability that does.
+ * Examples of violating items: 
+   - capability: Research Management
+   - capability: Research Funding & Grant Management
+   - capability: Research Data Management
+   - capability: Research Ethics & Integrity Oversight
+   - capability: Spin-off & Venture Creation
+
+[!!] C9 - Traceability: 7/25 (28%)
+----------------------------------------------------------------------
+ * Statement: Each value stream stage must be realized by exactly one capability.
+ * Examples of violating items: 
+   - value-stream: Educate Student
+   - value-stream: Execute Sponsored Research
+   - value-stream: Award & Set-up
+   - value-stream: Report & Close-out
+   - value-stream: Commercialize Intellectual Property
+
+[!!] C10 - Exclusive Manifestation: 1/6 (16.67%)
+----------------------------------------------------------------------
+ * Statement: Each capability may manifest only once as primary per top-level value stream, with an exception for the leaf-level.
+ * Examples of violating items: 
+   - capability: Curriculum & Program Development
+
+======================================================================
+
+
+
+EXTRA INFO (NOT FOR FEEDBACK TO LLM):
+ * Elements: 80
+ * Relations: 108
+ * Levels: 0, 1, 2
+ * Cross-Stream Utilization Index: 0.5
+ * Coherence Violations: 109/176 (61.93%)
