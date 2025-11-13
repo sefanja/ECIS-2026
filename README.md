@@ -85,25 +85,8 @@ A new folder containing all output files will be created in the `/llm_runs_opena
 If you use these artefacts or build upon our research, please cite our paper:
 
 ```bibtex
-@inproceedings{Severin2026ECIS,
-  author    = {Sefanja Severin},
-  title     = {From Constraints to Construction: A Modelling Procedure for Generating Coherent Business Architecture Models},
-  booktitle = {Proceedings of the Thirty-Fourth European Conference on Information Systems (ECIS)},
-  year      = {2026},
-  address   = {Milan, Italy}
-}
-```
-
-To cite the software artefacts in this repository directly:
-
-```bibtex
-@software{YourLastName2026Artefacts,
-  author       = {Your Name(s)},
-  title        = {{Replication Package for "From Constraints to Construction: A Modelling Procedure for Generating Coherent Business Architecture Models"}},
-  year         = {2024},
-  publisher    = {GitHub},
-  journal      = {GitHub repository},
-  howpublished = {\url{https://github.com/sefanja/ECIS-2006}}
+@inproceedings{
+  TODO
 }
 ```
 
