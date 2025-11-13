@@ -1,0 +1,11 @@
+{
+    "prompt_name": "Condition_B+2",
+    "timestamp": "20251113_144807",
+    "model": "gpt-5-2025-08-07",
+    "reasoning": "medium",
+    "verbosity": "low",
+    "input_tokens": 8283,
+    "output_tokens": 10824,
+    "total_tokens": 19107,
+    "system_instruction": "You are an experienced business architect. Adhere strictly to all instructions and provide output in the exact requested format."
+}

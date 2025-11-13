@@ -1,0 +1,523 @@
+# Prompt for Condition_B+3
+
+```markdown
+You are an experienced business architect. Your task is to correct an architectural model you previously created based on the validation report below.
+
+Your goal is to analyze the violations, understand the nature of each error using the provided rule statements, and generate a **new, complete, and corrected version** of the entire architectural model that resolves all listed violations.
+
+---
+
+## The Complete Model to be Corrected
+
+Here is the full model that contains the violations.
+
+**`elements.csv`:**
+```csv
+"ID","Type","Name","Documentation"
+"VS_L0_DMG","ValueStream","Develop & Maintain Grid","The end-to-end process of planning, building, and maintaining the physical grid infrastructure."
+"VS_L1_DMG_PD","ValueStream","Plan & Design","The strategic process of planning for future grid needs and designing the required assets."
+"VS_L2_DMG_1","ValueStream","Plan Network Expansion","Analyzes future load and generation patterns to create long-term network expansion plans."
+"VS_L2_DMG_2","ValueStream","Design & Engineer Bulk Assets","Creates detailed engineering specifications and designs for major grid components like substations and transmission lines."
+"VS_L1_DMG_B","ValueStream","Build Assets","The operational process of constructing new assets and commissioning them into service."
+"VS_L2_DMG_3","ValueStream","Construct & Commission Bulk Assets","Manages the construction, testing, and commissioning of new high-voltage grid infrastructure."
+"VS_L1_DMG_M","ValueStream","Maintain Assets","The operational process of performing ongoing maintenance on existing infrastructure to ensure reliability."
+"VS_L2_DMG_4","ValueStream","Inspect & Maintain Assets","Performs routine inspections, preventative maintenance, and corrective repairs on grid assets."
+"VS_L0_DE","ValueStream","Deliver Energy","The core process of operating the grid in real-time to ensure the reliable and secure flow of electricity from generators to consumers."
+"VS_L1_DE_OP","ValueStream","Operate & Monitor","The continuous process of forecasting energy needs, balancing the system, and monitoring grid status."
+"VS_L2_DE_1","ValueStream","Forecast Load & Generation","Predicts short-term electricity demand and generation availability to inform operational planning."
+"VS_L2_DE_2","ValueStream","Balance Supply & Demand","Manages generation dispatch and ancillary services to match electricity supply with demand in real-time."
+"VS_L2_DE_3","ValueStream","Monitor & Control Grid","Provides real-time visibility into grid conditions and executes control actions to maintain stability."
+"VS_L1_DE_RS","ValueStream","Respond & Restore","The process of detecting, responding to, and restoring service after a grid outage or fault."
+"VS_L2_DE_4","ValueStream","Restore Service","Identifies fault locations, dispatches crews, and executes switching plans to restore power to affected customers."
+"VS_L0_CNS","ValueStream","Connect New Service","The end-to-end process for safely and efficiently connecting new generation sources or large loads to the grid."
+"VS_L1_CNS_PS","ValueStream","Process & Study","The initial phase of handling a new connection request, including administrative processing and technical impact analysis."
+"VS_L2_CNS_1","ValueStream","Process Interconnection Request","Receives and validates applications from customers seeking to connect to the grid."
+"VS_L2_CNS_2","ValueStream","Conduct Impact Study","Performs engineering analysis to determine the impact of the proposed connection on grid stability and reliability."
+"VS_L1_CNS_IE","ValueStream","Implement & Energize","The phase of designing, constructing, and energizing the physical assets required for a new connection."
+"VS_L2_CNS_3","ValueStream","Design & Approve Connection","Develops the specific engineering designs and plans for the physical interconnection."
+"VS_L2_CNS_4","ValueStream","Construct & Energize Connection","Manages the construction and final commissioning of the new service connection."
+"CAP_L0_GAM","Capability","Grid Asset Management","The ability to manage the entire lifecycle of physical grid assets, from planning and acquisition to maintenance and disposal."
+"CAP_L1_SAP","Capability","Strategic Asset Planning","The ability to develop long-term strategies for asset investment, replacement, and risk management."
+"CAP_L2_AHRA","Capability","Asset Health & Risk Assessment","The ability to assess the condition and failure risk of grid assets using data and analytics."
+"CAP_L2_ICP","Capability","Investment & Capital Planning","The ability to prioritize and plan capital projects for grid enhancement and replacement."
+"CAP_L1_ND","Capability","Network Development","The ability to design, engineer, and manage the development of new grid infrastructure."
+"CAP_L2_NTP","Capability","Network Topology Planning","The ability to model and analyze the grid's physical and electrical layout to plan for changes."
+"CAP_L2_BIDE","Capability","Bulk Infrastructure Design & Engineering","The ability to create detailed technical designs for high-voltage transmission and substation assets."
+"CAP_L1_AC","Capability","Asset Construction","The ability to manage and execute the construction of new grid infrastructure."
+"CAP_L2_BCPM","Capability","Bulk Construction Project Management","The ability to manage large-scale construction projects for new grid infrastructure."
+"CAP_L1_AOM","Capability","Asset Operations & Maintenance","The ability to perform day-to-day operations and maintenance activities to ensure asset reliability."
+"CAP_L2_PCBM","Capability","Predictive & Condition-Based Maintenance","The ability to use real-time data to predict asset failures and optimize maintenance schedules."
+"CAP_L2_RIT","Capability","Routine Inspection & Testing","The ability to perform scheduled inspections and tests on grid equipment to ensure operational readiness."
+"CAP_L2_VM","Capability","Vegetation Management","The ability to manage vegetation growth near power lines to prevent outages."
+"CAP_L0_RTGC","Capability","Real-Time Grid Control","The ability to monitor, control, and optimize the bulk power system in real-time to ensure stability and reliability."
+"CAP_L1_LGF","Capability","Load & Generation Forecasting","The ability to predict near-term electricity demand and generation output."
+"CAP_L2_LGF_DF","Capability","Demand Forecasting","The ability to create accurate forecasts of electricity consumption across various time horizons."
+"CAP_L2_LGF_GF","Capability","Generation Forecasting","The ability to predict the output of variable generation sources like wind and solar."
+"CAP_L1_SMC","Capability","System Monitoring & Control","The ability to visualize grid status and execute remote control actions on grid equipment."
+"CAP_L2_SCSO","Capability","SCADA System Operation","The ability to operate Supervisory Control and Data Acquisition systems to monitor and control the grid."
+"CAP_L2_EDO","Capability","EMS/DMS Operation","The ability to operate Energy/Distribution Management Systems for advanced grid analysis and optimization."
+"CAP_L2_ODL","Capability","Outage Detection & Localization","The ability to automatically detect power outages and pinpoint their location on the grid."
+"CAP_L1_SBO","Capability","System Balancing & Optimization","The ability to balance electricity supply and demand continuously and optimize power flows."
+"CAP_L2_FVR","Capability","Frequency & Voltage Regulation","The ability to maintain system frequency and voltage levels within safe operational limits."
+"CAP_L2_ASD","Capability","Ancillary Service Dispatch","The ability to dispatch services like spinning reserves to support grid stability."
+"CAP_L2_CM","Capability","Congestion Management","The ability to manage power flows to prevent overloading of transmission lines."
+"CAP_L1_IRM","Capability","Incident & Restoration Management","The ability to manage the response to grid incidents and coordinate service restoration efforts."
+"CAP_L2_FSR","Capability","Fault Isolation & Service Restoration","The ability to isolate faulted sections of the grid and restore power to customers through switching operations."
+"CAP_L2_FCDC","Capability","Field Crew Dispatch & Coordination","The ability to dispatch and manage field crews for repair and restoration activities."
+"CAP_L2_COC","Capability","Customer Outage Communication","The ability to provide timely and accurate information to customers during power outages."
+"CAP_L0_GSP","Capability","Grid Service Provisioning","The ability to manage the processes for providing grid access and services to customers and third parties."
+"CAP_L1_CCM","Capability","Customer Connection Management","The ability to manage the application and study phase of new grid interconnection requests."
+"CAP_L2_IRP","Capability","Interconnection Request Processing","The ability to manage the intake, validation, and tracking of new service connection applications."
+"CAP_L1_CI","Capability","Connection Implementation","The ability to manage the design, construction, and energization of new grid connections."
+"CAP_L2_CDE","Capability","Connection Design & Engineering","The ability to create specific engineering designs for customer-requested grid interconnections."
+"CAP_L2_CCE","Capability","Connection Construction & Energization","The ability to oversee the physical construction and final commissioning of a new service connection."
+"CAP_L1_MB","Capability","Metering & Billing","The ability to measure customer energy consumption and manage the billing and invoicing process."
+"CAP_L2_MDC","Capability","Metering & Data Collection","The ability to install, maintain, and collect data from electricity meters."
+"CAP_L2_UDP","Capability","Usage Data Processing","The ability to validate, estimate, and aggregate meter data for billing purposes."
+"CAP_L2_BI","Capability","Billing & Invoicing","The ability to generate and manage customer invoices based on processed usage data."
+"CAP_L0_EMO","Capability","Energy Market Operations","The ability to participate in wholesale energy markets, including bidding, scheduling, and settlement."
+"CAP_L1_TRM","Capability","Transmission Rights Management","The ability to manage the acquisition and scheduling of rights to use the transmission system."
+"CAP_L2_TRM_AR","Capability","Auction & Reservation","The ability to participate in auctions and reserve transmission capacity."
+"CAP_L2_TRM_S","Capability","Scheduling","The ability to create and submit schedules for energy transmission."
+"CAP_L1_MSR","Capability","Market Settlement & Reconciliation","The ability to manage the financial settlement and reconciliation of energy market transactions."
+"CAP_L2_MSR_C","Capability","Charge Calculation","The ability to calculate charges and credits based on market activity."
+"CAP_L2_MSR_D","Capability","Dispute Resolution","The ability to manage and resolve discrepancies in market settlement statements."
+"BO_L0_GA","BusinessObject","Grid Asset","Information representing the physical components of the electricity grid."
+"BO_L1_TDI","BusinessObject","Transmission & Distribution Infrastructure","Information about the physical network components, such as lines, substations, and transformers."
+"BO_L2_PL","BusinessObject","Power Line","Data defining the characteristics and state of a specific power line."
+"BO_L2_SS","BusinessObject","Substation","Data defining the characteristics and state of a specific substation."
+"BO_L2_TR","BusinessObject","Transformer","Data defining the characteristics and state of a specific transformer."
+"BO_L1_AHR","BusinessObject","Asset Health Record","Information about the condition, performance, and risk associated with grid assets."
+"BO_L2_AHR_CD","BusinessObject","Condition Data","Raw and processed data from inspections, sensors, and tests regarding asset health."
+"BO_L2_AHR_RA","BusinessObject","Risk Analysis","The calculated risk profile and health index for a specific asset or asset class."
+"BO_L1_MWO","BusinessObject","Maintenance Work Order","Information required to plan, execute, and track maintenance work on grid assets."
+"BO_L2_MWO_D","BusinessObject","Work Order Details","The scope, required materials, and procedures for a specific maintenance task."
+"BO_L2_MWO_S","BusinessObject","Work Order Status","The current status, resource assignment, and completion records for a work order."
+"BO_L0_GS","BusinessObject","Grid State","Information representing the operational state of the electricity grid at any given time."
+"BO_L1_RTGD","BusinessObject","Real-Time Grid Data","Streaming telemetry data from the grid, including measurements from various sensors."
+"BO_L2_SCADAM","BusinessObject","SCADA Measurement","Real-time data points (e.g., voltage, current, power flow) from SCADA systems."
+"BO_L2_PMUD","BusinessObject","Phasor Measurement Unit Data","High-resolution, time-synchronized data on voltage and current phasors."
+"BO_L1_GTM","BusinessObject","Grid Topology Model","A digital representation of the grid's components and their electrical connectivity."
+"BO_L2_GTM_N","BusinessObject","Network Model","The detailed electrical parameter model of the grid used for power flow analysis."
+"BO_L2_GTM_C","BusinessObject","Connectivity Model","The representation of how grid components are physically and electrically connected."
+"BO_L1_OR","BusinessObject","Outage Record","Information documenting a power outage event, its cause, and the restoration process."
+"BO_L2_OR_L","BusinessObject","Outage Log","A time-stamped record of an outage event, including affected areas and customer reports."
+"BO_L2_OR_R","BusinessObject","Restoration Plan","The sequence of switching actions and crew assignments required to restore service."
+"BO_L0_GSA","BusinessObject","Grid Service Agreement","Information representing the contractual agreements for providing or receiving services from the grid."
+"BO_L1_IA","BusinessObject","Interconnection Agreement","The legal and technical agreement for connecting a customer's facility to the grid."
+"BO_L2_IA_T","BusinessObject","Terms & Conditions","The contractual terms, obligations, and service levels of an interconnection agreement."
+"BO_L2_IA_TS","BusinessObject","Technical Specifications","The detailed engineering specifications and requirements for the physical interconnection."
+"BO_L1_TSR","BusinessObject","Transmission Service Request","A formal request to reserve and schedule the use of the transmission network."
+"BO_L2_TSR_R","BusinessObject","Request Details","The specific parameters of a transmission service request, such as path, capacity, and timing."
+"BO_L2_TSR_S","BusinessObject","Service Schedule","The confirmed schedule and profile for an approved transmission service."
+"BO_L1_CMD","BusinessObject","Customer Metering Data","Information about a customer's energy consumption collected from meters."
+"BO_L2_CMD_I","BusinessObject","Interval Data","Granular time-series data of energy consumption, typically in 15- or 60-minute intervals."
+"BO_L2_CMD_P","BusinessObject","Profile Data","Aggregated or processed consumption data used to create customer load profiles."
+```
+
+**`relations.csv`:**
+```csv
+"ID","Type","Name","Documentation","Source","Target","Specialization"
+"","CompositionRelationship","","","VS_L0_DMG","VS_L1_DMG_PD",""
+"","CompositionRelationship","","","VS_L0_DMG","VS_L1_DMG_B",""
+"","CompositionRelationship","","","VS_L0_DMG","VS_L1_DMG_M",""
+"","CompositionRelationship","","","VS_L1_DMG_PD","VS_L2_DMG_1",""
+"","CompositionRelationship","","","VS_L1_DMG_PD","VS_L2_DMG_2",""
+"","CompositionRelationship","","","VS_L1_DMG_B","VS_L2_DMG_3",""
+"","CompositionRelationship","","","VS_L1_DMG_M","VS_L2_DMG_4",""
+"","CompositionRelationship","","","VS_L0_DE","VS_L1_DE_OP",""
+"","CompositionRelationship","","","VS_L0_DE","VS_L1_DE_RS",""
+"","CompositionRelationship","","","VS_L1_DE_OP","VS_L2_DE_1",""
+"","CompositionRelationship","","","VS_L1_DE_OP","VS_L2_DE_2",""
+"","CompositionRelationship","","","VS_L1_DE_OP","VS_L2_DE_3",""
+"","CompositionRelationship","","","VS_L1_DE_RS","VS_L2_DE_4",""
+"","CompositionRelationship","","","VS_L0_CNS","VS_L1_CNS_PS",""
+"","CompositionRelationship","","","VS_L0_CNS","VS_L1_CNS_IE",""
+"","CompositionRelationship","","","VS_L1_CNS_PS","VS_L2_CNS_1",""
+"","CompositionRelationship","","","VS_L1_CNS_PS","VS_L2_CNS_2",""
+"","CompositionRelationship","","","VS_L1_CNS_IE","VS_L2_CNS_3",""
+"","CompositionRelationship","","","VS_L1_CNS_IE","VS_L2_CNS_4",""
+"","CompositionRelationship","","","CAP_L0_GAM","CAP_L1_SAP",""
+"","CompositionRelationship","","","CAP_L0_GAM","CAP_L1_ND",""
+"","CompositionRelationship","","","CAP_L0_GAM","CAP_L1_AC",""
+"","CompositionRelationship","","","CAP_L0_GAM","CAP_L1_AOM",""
+"","CompositionRelationship","","","CAP_L1_SAP","CAP_L2_AHRA",""
+"","CompositionRelationship","","","CAP_L1_SAP","CAP_L2_ICP",""
+"","CompositionRelationship","","","CAP_L1_ND","CAP_L2_NTP",""
+"","CompositionRelationship","","","CAP_L1_ND","CAP_L2_BIDE",""
+"","CompositionRelationship","","","CAP_L1_AC","CAP_L2_BCPM",""
+"","CompositionRelationship","","","CAP_L1_AOM","CAP_L2_PCBM",""
+"","CompositionRelationship","","","CAP_L1_AOM","CAP_L2_RIT",""
+"","CompositionRelationship","","","CAP_L1_AOM","CAP_L2_VM",""
+"","CompositionRelationship","","","CAP_L0_RTGC","CAP_L1_LGF",""
+"","CompositionRelationship","","","CAP_L0_RTGC","CAP_L1_SMC",""
+"","CompositionRelationship","","","CAP_L0_RTGC","CAP_L1_SBO",""
+"","CompositionRelationship","","","CAP_L0_RTGC","CAP_L1_IRM",""
+"","CompositionRelationship","","","CAP_L1_LGF","CAP_L2_LGF_DF",""
+"","CompositionRelationship","","","CAP_L1_LGF","CAP_L2_LGF_GF",""
+"","CompositionRelationship","","","CAP_L1_SMC","CAP_L2_SCSO",""
+"","CompositionRelationship","","","CAP_L1_SMC","CAP_L2_EDO",""
+"","CompositionRelationship","","","CAP_L1_SMC","CAP_L2_ODL",""
+"","CompositionRelationship","","","CAP_L1_SBO","CAP_L2_FVR",""
+"","CompositionRelationship","","","CAP_L1_SBO","CAP_L2_ASD",""
+"","CompositionRelationship","","","CAP_L1_SBO","CAP_L2_CM",""
+"","CompositionRelationship","","","CAP_L1_IRM","CAP_L2_FSR",""
+"","CompositionRelationship","","","CAP_L1_IRM","CAP_L2_FCDC",""
+"","CompositionRelationship","","","CAP_L1_IRM","CAP_L2_COC",""
+"","CompositionRelationship","","","CAP_L0_GSP","CAP_L1_CCM",""
+"","CompositionRelationship","","","CAP_L0_GSP","CAP_L1_CI",""
+"","CompositionRelationship","","","CAP_L0_GSP","CAP_L1_MB",""
+"","CompositionRelationship","","","CAP_L1_CCM","CAP_L2_IRP",""
+"","CompositionRelationship","","","CAP_L1_CI","CAP_L2_CDE",""
+"","CompositionRelationship","","","CAP_L1_CI","CAP_L2_CCE",""
+"","CompositionRelationship","","","CAP_L1_MB","CAP_L2_MDC",""
+"","CompositionRelationship","","","CAP_L1_MB","CAP_L2_UDP",""
+"","CompositionRelationship","","","CAP_L1_MB","CAP_L2_BI",""
+"","CompositionRelationship","","","CAP_L0_EMO","CAP_L1_TRM",""
+"","CompositionRelationship","","","CAP_L0_EMO","CAP_L1_MSR",""
+"","CompositionRelationship","","","CAP_L1_TRM","CAP_L2_TRM_AR",""
+"","CompositionRelationship","","","CAP_L1_TRM","CAP_L2_TRM_S",""
+"","CompositionRelationship","","","CAP_L1_MSR","CAP_L2_MSR_C",""
+"","CompositionRelationship","","","CAP_L1_MSR","CAP_L2_MSR_D",""
+"","CompositionRelationship","","","BO_L0_GA","BO_L1_TDI",""
+"","CompositionRelationship","","","BO_L0_GA","BO_L1_AHR",""
+"","CompositionRelationship","","","BO_L0_GA","BO_L1_MWO",""
+"","CompositionRelationship","","","BO_L1_TDI","BO_L2_PL",""
+"","CompositionRelationship","","","BO_L1_TDI","BO_L2_SS",""
+"","CompositionRelationship","","","BO_L1_TDI","BO_L2_TR",""
+"","CompositionRelationship","","","BO_L1_AHR","BO_L2_AHR_CD",""
+"","CompositionRelationship","","","BO_L1_AHR","BO_L2_AHR_RA",""
+"","CompositionRelationship","","","BO_L1_MWO","BO_L2_MWO_D",""
+"","CompositionRelationship","","","BO_L1_MWO","BO_L2_MWO_S",""
+"","CompositionRelationship","","","BO_L0_GS","BO_L1_RTGD",""
+"","CompositionRelationship","","","BO_L0_GS","BO_L1_GTM",""
+"","CompositionRelationship","","","BO_L0_GS","BO_L1_OR",""
+"","CompositionRelationship","","","BO_L1_RTGD","BO_L2_SCADAM",""
+"","CompositionRelationship","","","BO_L1_RTGD","BO_L2_PMUD",""
+"","CompositionRelationship","","","BO_L1_GTM","BO_L2_GTM_N",""
+"","CompositionRelationship","","","BO_L1_GTM","BO_L2_GTM_C",""
+"","CompositionRelationship","","","BO_L1_OR","BO_L2_OR_L",""
+"","CompositionRelationship","","","BO_L1_OR","BO_L2_OR_R",""
+"","CompositionRelationship","","","BO_L0_GSA","BO_L1_IA",""
+"","CompositionRelationship","","","BO_L0_GSA","BO_L1_TSR",""
+"","CompositionRelationship","","","BO_L0_GSA","BO_L1_CMD",""
+"","CompositionRelationship","","","BO_L1_IA","BO_L2_IA_T",""
+"","CompositionRelationship","","","BO_L1_IA","BO_L2_IA_TS",""
+"","CompositionRelationship","","","BO_L1_TSR","BO_L2_TSR_R",""
+"","CompositionRelationship","","","BO_L1_TSR","BO_L2_TSR_S",""
+"","CompositionRelationship","","","BO_L1_CMD","BO_L2_CMD_I",""
+"","CompositionRelationship","","","BO_L1_CMD","BO_L2_CMD_P",""
+"","ServingRelationship","","","CAP_L0_GAM","VS_L0_DMG",""
+"","ServingRelationship","","","CAP_L1_ND","VS_L1_DMG_PD",""
+"","ServingRelationship","","","CAP_L2_ICP","VS_L2_DMG_1",""
+"","ServingRelationship","","","CAP_L2_BIDE","VS_L2_DMG_2",""
+"","ServingRelationship","","","CAP_L1_AC","VS_L1_DMG_B",""
+"","ServingRelationship","","","CAP_L2_BCPM","VS_L2_DMG_3",""
+"","ServingRelationship","","","CAP_L1_AOM","VS_L1_DMG_M",""
+"","ServingRelationship","","","CAP_L2_RIT","VS_L2_DMG_4",""
+"","ServingRelationship","","","CAP_L0_RTGC","VS_L0_DE",""
+"","ServingRelationship","","","CAP_L1_SMC","VS_L1_DE_OP",""
+"","ServingRelationship","","","CAP_L2_LGF_DF","VS_L2_DE_1",""
+"","ServingRelationship","","","CAP_L2_ASD","VS_L2_DE_2",""
+"","ServingRelationship","","","CAP_L2_SCSO","VS_L2_DE_3",""
+"","ServingRelationship","","","CAP_L1_IRM","VS_L1_DE_RS",""
+"","ServingRelationship","","","CAP_L2_FSR","VS_L2_DE_4",""
+"","ServingRelationship","","","CAP_L0_GSP","VS_L0_CNS",""
+"","ServingRelationship","","","CAP_L1_CCM","VS_L1_CNS_PS",""
+"","ServingRelationship","","","CAP_L2_IRP","VS_L2_CNS_1",""
+"","ServingRelationship","","","CAP_L2_NTP","VS_L2_CNS_2",""
+"","ServingRelationship","","","CAP_L1_CI","VS_L1_CNS_IE",""
+"","ServingRelationship","","","CAP_L2_CDE","VS_L2_CNS_3",""
+"","ServingRelationship","","","CAP_L2_CCE","VS_L2_CNS_4",""
+"","ServingRelationship","","","CAP_L0_EMO","CAP_L0_RTGC",""
+"","ServingRelationship","","","CAP_L1_TRM","CAP_L1_SBO",""
+"","ServingRelationship","","","CAP_L1_MSR","CAP_L1_MB",""
+"","ServingRelationship","","","CAP_L2_AHRA","CAP_L2_ICP",""
+"","ServingRelationship","","","CAP_L1_SAP","CAP_L1_ND",""
+"","ServingRelationship","","","CAP_L1_ND","CAP_L1_CCM",""
+"","ServingRelationship","","","CAP_L1_LGF","CAP_L1_SMC",""
+"","ServingRelationship","","","CAP_L1_SBO","CAP_L1_SMC",""
+"","ServingRelationship","","","CAP_L2_PCBM","CAP_L2_RIT",""
+"","ServingRelationship","","","CAP_L2_VM","CAP_L2_RIT",""
+"","ServingRelationship","","","CAP_L2_LGF_GF","CAP_L2_LGF_DF",""
+"","ServingRelationship","","","CAP_L2_EDO","CAP_L2_SCSO",""
+"","ServingRelationship","","","CAP_L2_ODL","CAP_L2_FSR",""
+"","ServingRelationship","","","CAP_L2_TRM_S","CAP_L2_CM",""
+"","ServingRelationship","","","CAP_L0_GAM","CAP_L0_GSP",""
+"","ServingRelationship","","","CAP_L1_SMC","CAP_L1_IRM",""
+"","AssociationRelationship","","","CAP_L0_GAM","BO_L0_GA",""
+"","AssociationRelationship","","","CAP_L1_SAP","BO_L1_AHR",""
+"","AssociationRelationship","","","CAP_L2_AHRA","BO_L2_AHR_RA",""
+"","AssociationRelationship","","","CAP_L1_ND","BO_L1_TDI",""
+"","AssociationRelationship","","","CAP_L2_NTP","BO_L2_GTM_N",""
+"","AssociationRelationship","","","CAP_L2_BIDE","BO_L2_PL",""
+"","AssociationRelationship","","","CAP_L2_BIDE","BO_L2_SS",""
+"","AssociationRelationship","","","CAP_L2_BIDE","BO_L2_TR",""
+"","AssociationRelationship","","","CAP_L2_BCPM","BO_L2_MWO_D",""
+"","AssociationRelationship","","","CAP_L1_AOM","BO_L1_MWO",""
+"","AssociationRelationship","","","CAP_L2_PCBM","BO_L2_AHR_CD",""
+"","AssociationRelationship","","","CAP_L2_RIT","BO_L2_PL",""
+"","AssociationRelationship","","","CAP_L2_RIT","BO_L2_SS",""
+"","AssociationRelationship","","","CAP_L2_RIT","BO_L2_TR",""
+"","AssociationRelationship","","","CAP_L2_VM","BO_L2_PL",""
+"","AssociationRelationship","","","CAP_L0_RTGC","BO_L0_GS",""
+"","AssociationRelationship","","","CAP_L1_LGF","BO_L1_RTGD",""
+"","AssociationRelationship","","","CAP_L2_LGF_DF","BO_L1_RTGD",""
+"","AssociationRelationship","","","CAP_L2_LGF_GF","BO_L1_RTGD",""
+"","AssociationRelationship","","","CAP_L1_SMC","BO_L1_RTGD",""
+"","AssociationRelationship","","","CAP_L2_SCSO","BO_L2_SCADAM",""
+"","AssociationRelationship","","","CAP_L2_EDO","BO_L2_PMUD",""
+"","AssociationRelationship","","","CAP_L2_ODL","BO_L2_OR_L",""
+"","AssociationRelationship","","","CAP_L1_SBO","BO_L1_GTM",""
+"","AssociationRelationship","","","CAP_L2_FVR","BO_L2_GTM_N",""
+"","AssociationRelationship","","","CAP_L2_ASD","BO_L2_GTM_C",""
+"","AssociationRelationship","","","CAP_L2_CM","BO_L2_GTM_N",""
+"","AssociationRelationship","","","CAP_L1_IRM","BO_L1_OR",""
+"","AssociationRelationship","","","CAP_L2_FSR","BO_L2_OR_R",""
+"","AssociationRelationship","","","CAP_L2_FCDC","BO_L2_MWO_S",""
+"","AssociationRelationship","","","CAP_L2_COC","BO_L2_OR_L",""
+"","AssociationRelationship","","","CAP_L0_GSP","BO_L0_GSA",""
+"","AssociationRelationship","","","CAP_L1_CCM","BO_L1_IA",""
+"","AssociationRelationship","","","CAP_L2_IRP","BO_L2_IA_T",""
+"","AssociationRelationship","","","CAP_L1_CI","BO_L1_IA",""
+"","AssociationRelationship","","","CAP_L2_CDE","BO_L2_IA_TS",""
+"","AssociationRelationship","","","CAP_L2_CCE","BO_L2_PL",""
+"","AssociationRelationship","","","CAP_L2_CCE","BO_L2_SS",""
+"","AssociationRelationship","","","CAP_L2_CCE","BO_L2_TR",""
+"","AssociationRelationship","","","CAP_L1_MB","BO_L1_CMD",""
+"","AssociationRelationship","","","CAP_L2_MDC","BO_L2_CMD_I",""
+"","AssociationRelationship","","","CAP_L2_UDP","BO_L2_CMD_P",""
+"","AssociationRelationship","","","CAP_L2_BI","BO_L1_CMD",""
+"","AssociationRelationship","","","CAP_L1_TRM","BO_L1_TSR",""
+"","AssociationRelationship","","","CAP_L2_TRM_AR","BO_L2_TSR_R",""
+"","AssociationRelationship","","","CAP_L2_TRM_S","BO_L2_TSR_S",""
+"","AssociationRelationship","","","CAP_L1_MSR","BO_L1_CMD",""
+"","AssociationRelationship","","","CAP_L2_MSR_C","BO_L1_CMD",""
+"","AssociationRelationship","","","CAP_L2_MSR_D","BO_L1_CMD",""
+"","AssociationRelationship","","","CAP_L1_ND","BO_L1_GTM",""
+```
+
+**`properties.csv`:**
+```csv
+"ID","Key","Value"
+"VS_L0_DMG","Level","0"
+"VS_L0_DMG","Value Proposition","N/A (Internal Asset Creation)"
+"VS_L0_DMG","Value Stream Pattern","MTS"
+"VS_L1_DMG_PD","Level","1"
+"VS_L1_DMG_PD","Sequence","1"
+"VS_L2_DMG_1","Level","2"
+"VS_L2_DMG_1","Sequence","1"
+"VS_L2_DMG_2","Level","2"
+"VS_L2_DMG_2","Sequence","2"
+"VS_L1_DMG_B","Level","1"
+"VS_L1_DMG_B","Sequence","2"
+"VS_L2_DMG_3","Level","2"
+"VS_L2_DMG_3","Sequence","1"
+"VS_L1_DMG_M","Level","1"
+"VS_L1_DMG_M","Sequence","3"
+"VS_L2_DMG_4","Level","2"
+"VS_L2_DMG_4","Sequence","1"
+"VS_L0_DE","Level","0"
+"VS_L0_DE","Value Proposition","Reliable and safe delivery of electricity to power homes and businesses. & Secure and efficient transmission of bulk energy from generation sources to load centers."
+"VS_L0_DE","Value Stream Pattern","ATO"
+"VS_L1_DE_OP","Level","1"
+"VS_L1_DE_OP","Sequence","1"
+"VS_L2_DE_1","Level","2"
+"VS_L2_DE_1","Sequence","1"
+"VS_L2_DE_2","Level","2"
+"VS_L2_DE_2","Sequence","2"
+"VS_L2_DE_3","Level","2"
+"VS_L2_DE_3","Sequence","3"
+"VS_L1_DE_RS","Level","1"
+"VS_L1_DE_RS","Sequence","2"
+"VS_L2_DE_4","Level","2"
+"VS_L2_DE_4","Sequence","1"
+"VS_L0_CNS","Level","0"
+"VS_L0_CNS","Value Proposition","A standardized and safe process to interconnect distributed energy resources with the grid."
+"VS_L0_CNS","Value Stream Pattern","ETO"
+"VS_L1_CNS_PS","Level","1"
+"VS_L1_CNS_PS","Sequence","1"
+"VS_L2_CNS_1","Level","2"
+"VS_L2_CNS_1","Sequence","1"
+"VS_L2_CNS_2","Level","2"
+"VS_L2_CNS_2","Sequence","2"
+"VS_L1_CNS_IE","Level","1"
+"VS_L1_CNS_IE","Sequence","2"
+"VS_L2_CNS_3","Level","2"
+"VS_L2_CNS_3","Sequence","1"
+"VS_L2_CNS_4","Level","2"
+"VS_L2_CNS_4","Sequence","2"
+"CAP_L0_GAM","Level","0"
+"CAP_L1_SAP","Level","1"
+"CAP_L2_AHRA","Level","2"
+"CAP_L2_ICP","Level","2"
+"CAP_L1_ND","Level","1"
+"CAP_L2_NTP","Level","2"
+"CAP_L2_BIDE","Level","2"
+"CAP_L1_AC","Level","1"
+"CAP_L2_BCPM","Level","2"
+"CAP_L1_AOM","Level","1"
+"CAP_L2_PCBM","Level","2"
+"CAP_L2_RIT","Level","2"
+"CAP_L2_VM","Level","2"
+"CAP_L0_RTGC","Level","0"
+"CAP_L1_LGF","Level","1"
+"CAP_L2_LGF_DF","Level","2"
+"CAP_L2_LGF_GF","Level","2"
+"CAP_L1_SMC","Level","1"
+"CAP_L2_SCSO","Level","2"
+"CAP_L2_EDO","Level","2"
+"CAP_L2_ODL","Level","2"
+"CAP_L1_SBO","Level","1"
+"CAP_L2_FVR","Level","2"
+"CAP_L2_ASD","Level","2"
+"CAP_L2_CM","Level","2"
+"CAP_L1_IRM","Level","1"
+"CAP_L2_FSR","Level","2"
+"CAP_L2_FCDC","Level","2"
+"CAP_L2_COC","Level","2"
+"CAP_L0_GSP","Level","0"
+"CAP_L1_CCM","Level","1"
+"CAP_L2_IRP","Level","2"
+"CAP_L1_CI","Level","1"
+"CAP_L2_CDE","Level","2"
+"CAP_L2_CCE","Level","2"
+"CAP_L1_MB","Level","1"
+"CAP_L2_MDC","Level","2"
+"CAP_L2_UDP","Level","2"
+"CAP_L2_BI","Level","2"
+"CAP_L0_EMO","Level","0"
+"CAP_L1_TRM","Level","1"
+"CAP_L2_TRM_AR","Level","2"
+"CAP_L2_TRM_S","Level","2"
+"CAP_L1_MSR","Level","1"
+"CAP_L2_MSR_C","Level","2"
+"CAP_L2_MSR_D","Level","2"
+"BO_L0_GA","Level","0"
+"BO_L1_TDI","Level","1"
+"BO_L2_PL","Level","2"
+"BO_L2_SS","Level","2"
+"BO_L2_TR","Level","2"
+"BO_L1_AHR","Level","1"
+"BO_L2_AHR_CD","Level","2"
+"BO_L2_AHR_RA","Level","2"
+"BO_L1_MWO","Level","1"
+"BO_L2_MWO_D","Level","2"
+"BO_L2_MWO_S","Level","2"
+"BO_L0_GS","Level","0"
+"BO_L1_RTGD","Level","1"
+"BO_L2_SCADAM","Level","2"
+"BO_L2_PMUD","Level","2"
+"BO_L1_GTM","Level","1"
+"BO_L2_GTM_N","Level","2"
+"BO_L2_GTM_C","Level","2"
+"BO_L1_OR","Level","1"
+"BO_L2_OR_L","Level","2"
+"BO_L2_OR_R","Level","2"
+"BO_L0_GSA","Level","0"
+"BO_L1_IA","Level","1"
+"BO_L2_IA_T","Level","2"
+"BO_L2_IA_TS","Level","2"
+"BO_L1_TSR","Level","1"
+"BO_L2_TSR_R","Level","2"
+"BO_L2_TSR_S","Level","2"
+"BO_L1_CMD","Level","1"
+"BO_L2_CMD_I","Level","2"
+"BO_L2_CMD_P","Level","2"
+```
+
+---
+
+## The Validation Report
+
+The following violations were detected in the model provided above. The report includes the statement for each violated rule.
+
+```
+======================================================================
+          ARCHITECTURAL COHERENCE VALIDATION REPORT
+======================================================================
+
+OVERALL STATUS: FAILED
+
+VALIDATION SUMMARY:
+  - Total Violations: 58/612 (9.48%)
+  - FAILED Rules: C4, C5, C6, C7, C8
+  - PASSED Rules: C0, C1, C2, C3, C9, C10
+
+NOTE: If C0, C1 or C2 fails, the results become unreliable.
+
+----------------------------------------------------------------------
+                   DETAILED VIOLATION ANALYSIS
+----------------------------------------------------------------------
+
+[!!] C4 - Upward coherence: 24/80 (30%)
+----------------------------------------------------------------------
+ * Statement: A non-hierarchical relationship between two elements requires a corresponding relationship between their parents (if any), provided the parents are distinct and with one exception: the relationship does not need to be propagated if the parent elements are both primary capabilities within the same top-level value stream.
+ * Examples of violating items: 
+   - serving-relationship: (Investment & Capital Planning) --> (Plan Network Expansion)
+   - serving-relationship: (Demand Forecasting) --> (Forecast Load & Generation)
+   - serving-relationship: (Ancillary Service Dispatch) --> (Balance Supply & Demand)
+   - serving-relationship: (Network Topology Planning) --> (Conduct Impact Study)
+   - serving-relationship: (Market Settlement & Reconciliation) --> (Metering & Billing)
+
+[!!] C5 - Downward coherence: 13/40 (32.5%)
+----------------------------------------------------------------------
+ * Statement: A relationship between two parent elements requires that at least one pair of their respective children (if any) is also related.
+ * Examples of violating items: 
+   - serving-relationship: (Market Settlement & Reconciliation) --> (Metering & Billing)
+   - serving-relationship: (Strategic Asset Planning) --> (Network Development)
+   - serving-relationship: (Network Development) --> (Customer Connection Management)
+   - serving-relationship: (Load & Generation Forecasting) --> (System Monitoring & Control)
+   - serving-relationship: (System Balancing & Optimization) --> (System Monitoring & Control)
+
+[!!] C6 - Capability Impact: 4/46 (8.7%)
+----------------------------------------------------------------------
+ * Statement: Each business capability must transform exactly one business object, with one exception: at the leaf level it may transform multiple objects.
+ * Examples of violating items: 
+   - capability: Investment & Capital Planning
+   - capability: Network Development
+   - capability: Asset Construction
+   - capability: Energy Market Operations
+
+[!!] C7 - Object Relevance: 4/31 (12.9%)
+----------------------------------------------------------------------
+ * Statement: Each business object must be transformed by exactly one business capability, with one exception: at the leaf level, an object may be transformed by multiple capabilities.
+ * Examples of violating items: 
+   - business-object: Real-Time Grid Data
+   - business-object: Grid Topology Model
+   - business-object: Interconnection Agreement
+   - business-object: Customer Metering Data
+
+[!!] C8 - Capability Purpose: 13/46 (28.26%)
+----------------------------------------------------------------------
+ * Statement: Each capability must either directly realize a value stream stage or support another capability that does.
+ * Examples of violating items: 
+   - capability: Frequency & Voltage Regulation
+   - capability: Congestion Management
+   - capability: Field Crew Dispatch & Coordination
+   - capability: Customer Outage Communication
+   - capability: Metering & Billing
+
+======================================================================
+```
+
+---
+
+## Your Task: Analyze, Correct, and Regenerate
+
+1. **Analyze the Violations:** For each violation in the report, use the provided `Statement` and `Rationale` to understand the nature of the logical error.
+2. **Correct the Model:** Modify the elements, relationships, and hierarchies in the model to resolve all identified violations. You must determine the most logical way to correct the model based on your understanding of the rules.
+3. **Generate the Final Output:** Provide the **full, corrected version** of all three CSV files (`elements.csv`, `relations.csv`, `properties.csv`).
+
+---
+
+### Final Output Requirements
+
+Before generating the final CSV files, you **must** ensure the following format requirements are met:
+
+* **Content Completeness:** The `Documentation` column for **every single element** in `elements.csv` must be filled with a concise, meaningful description.
+* **Format Adherence:**
+  * The `Type` column in `elements.csv` may **only** contain one of the three allowed values: `ValueStream`, `Capability`, or `BusinessObject`.
+  * The `Type` column in `relations.csv` may **only** contain one of the three allowed values: `CompositionRelationship`, `ServingRelationship`, or `AssociationRelationship`.
+
+```

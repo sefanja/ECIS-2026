@@ -116,7 +116,7 @@ if __name__ == "__main__":
             print(f"Fout: {filename} niet gevonden. Zorg dat uw prompt bestanden klaarliggen.")
             return None
 
-    prompt = load_prompt("Prompt.txt") 
+    prompt = load_prompt("Prompt_openai.txt") 
     
     if prompt:
-        run_llm_experiment_openai("Condition_C", prompt)
+        run_llm_experiment_openai("Condition_A", prompt)

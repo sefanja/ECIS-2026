@@ -167,7 +167,7 @@ const report = {
         C3: {
             name: 'Consistent refinement depth',
             statement: 'All leaf elements (elements without children) must have the same number of ancestors.',
-            coherence: false
+            coherence: true
         },
         C4: {
             name: 'Upward coherence',
@@ -403,10 +403,8 @@ if (totalViolations > 0) {
 console.log();
 console.log('======================================================================');
 
-
-// Utilization of capabilities across value streams, that manifest at least once as primary
 const utilization = [];
-$('capability').filter(e => $(e).outRels('serving-relationship').targetEnds('value-stream').size() > 0).each(e => {
+$('capability').each(e => {
     const topVSIDs = getSupportedTopValueStreams(e);
     utilization.push(topVSIDs.size);
 });
@@ -420,4 +418,4 @@ console.log(' * Elements: ' + $('element').size());
 console.log(' * Relations: ' + $('relation').size());
 console.log(' * Levels: ' + Array.from(new Set($('element').map(getLevel))).join(', '));
 console.log(' * Cross-Stream Utilization Index: ' + Math.round(utilizationRate * 10) / 10);
-console.log(` * Coherence Violations: ${coherenceViolations}/${coherenceViolationOpportunities} (${Math.round(coherenceViolations/coherenceViolationOpportunities * 10000) / 100}%)`);
+console.log(` * Formal coherence: ${coherenceViolations}/${coherenceViolationOpportunities} (${Math.round(coherenceViolations/coherenceViolationOpportunities * 10000) / 100}%)`);

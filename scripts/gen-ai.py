@@ -29,7 +29,7 @@ SYSTEM_INSTRUCTION = "You are an experienced business architect. Adhere strictly
 def run_llm_experiment(prompt_name: str, prompt_text: str):
     """Voert de LLM-call uit en slaat de resultaten op in Markdown-bestanden."""
     
-    print(f"\n--- Running Experiment: {prompt_name} ---")
+    print(f"\n--- Running Experiment: {prompt_name} (Gemini) ---")
     
     # Maak de output map aan
     output_dir = "llm_runs_gen-ai"
@@ -121,7 +121,7 @@ if __name__ == "__main__":
             print(f"Fout: {filename} niet gevonden. Zorg dat uw prompt bestanden klaarliggen.")
             return None
 
-    prompt = load_prompt("Prompt.txt") 
+    prompt = load_prompt("Prompt_gen-ai.txt") 
     
     if prompt:
-        run_llm_experiment("Condition_C", prompt)
+        run_llm_experiment("Condition_A", prompt)

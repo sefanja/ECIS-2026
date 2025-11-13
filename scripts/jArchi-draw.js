@@ -24,21 +24,23 @@ $('value-stream')
                     elL0,
                     (2*spaces++ + 1)*S + leafs*(W+S),
                     S,
-                    (1+ 2*children + grandchildren)*S + grandchildren*W,
+                    (1+ 2*Math.max(children, 1) + Math.max(grandchildren, children, 1))*S + Math.max(grandchildren, children, 1)*W,
                     H + 8*S);
                 let diagramObject = $(elL0).objectRefs().first();
                 diagramObject.textPosition = 0;
+                if (children < 1) leafs++;
                 $(elL0).outRels('composition-relationship').targetEnds().each(elL1 => {
                     let children = $(elL1).outRels('composition-relationship').size();
                     view.add(
                         elL1,
                         (2*spaces++)*S + leafs*(W+S),
                         4*S,
-                        (1 + children)*S + children*W,
+                        (1 + Math.max(children, 1))*S + Math.max(children, 1)*W,
                         H + 4*S,
                         true);
                     let diagramObject = $(elL1).objectRefs().first();
                     diagramObject.textPosition = 0;
+                    if (children < 1) leafs++;
                     $(elL1).outRels('composition-relationship').targetEnds().each(elL2 => {
                         view.add(
                             elL2,
@@ -47,7 +49,6 @@ $('value-stream')
                             W+1,
                             H,
                             true);
-                        $(elL2).objectRefs().first().labelExpression = '${property:Sequence}. ${name}';
                     })
                 })
             });
@@ -63,21 +64,23 @@ $('capability')
                     elL0,
                     (2*spaces++ + 1)*S + leafs*(W+S),
                     V + S,
-                    (1+ 2*children + grandchildren)*S + grandchildren*W,
+                    (1+ 2*Math.max(children, 1) + Math.max(grandchildren, children, 1))*S + Math.max(grandchildren, children, 1)*W,
                     H + 8*S);
                 let diagramObject = $(elL0).objectRefs().first();
                 diagramObject.textPosition = 0;
+                if (children < 1) leafs++;
                 $(elL0).outRels('composition-relationship').targetEnds().each(elL1 => {
                     let children = $(elL1).outRels('composition-relationship').size();
                     view.add(
                         elL1,
                         (2*spaces++)*S + leafs*(W+S),
                         V + 4*S,
-                        (1 + children)*S + children*W,
+                        (1 + Math.max(children, 1))*S + Math.max(children, 1)*W,
                         H + 4*S,
                         true);
                     let diagramObject = $(elL1).objectRefs().first();
                     diagramObject.textPosition = 0;
+                    if (children < 1) leafs++;
                     $(elL1).outRels('composition-relationship').targetEnds().each(elL2 => {
                         view.add(
                             elL2,
@@ -101,21 +104,23 @@ $('business-object')
                     elL0,
                     (2*spaces++ + 1)*S + leafs*(W+S),
                     2*V + S,
-                    (1+ 2*children + grandchildren)*S + grandchildren*W,
+                    (1+ 2*Math.max(children, 1) + Math.max(grandchildren, children, 1))*S + Math.max(grandchildren, children, 1)*W,
                     H + 8*S);
                 let diagramObject = $(elL0).objectRefs().first();
                 diagramObject.textPosition = 0;
+                if (children < 1) leafs++;
                 $(elL0).outRels('composition-relationship').targetEnds().each(elL1 => {
                     let children = $(elL1).outRels('composition-relationship').size();
                     view.add(
                         elL1,
                         (2*spaces++)*S + leafs*(W+S),
                         2*V + 4*S,
-                        (1 + children)*S + children*W,
+                        (1 + Math.max(children, 1))*S + Math.max(children, 1)*W,
                         H + 4*S,
                         true);
                     let diagramObject = $(elL1).objectRefs().first();
                     diagramObject.textPosition = 0;
+                    if (children < 1) leafs++;
                     $(elL1).outRels('composition-relationship').targetEnds().each(elL2 => {
                         view.add(
                             elL2,
