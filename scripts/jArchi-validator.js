@@ -232,6 +232,7 @@ const updateReport = (rule, space, compliant) => {
 let space; // The space of opportunities to violate a constraint
 let compliant; // The items that comply to the constraint
 
+
 // --- C0: Valid Level (Property vs. Ancestor Count) ---
 space = $('element');
 compliant = space.filter(e => parseInt(getLevel(e)) === getAncestorCount(e));
@@ -293,6 +294,7 @@ compliant = space.filter(r => {
     return parentRelExists;
 });
 updateReport('C4', space, compliant);
+
 
 // --- C5: Downward Coherence ---
 space = $('relation').not('composition-relationship').filter(r =>
