@@ -1,4 +1,4 @@
-<!-- INSERT HEADER.MD -->
+`[INSERT HEADER.MD HERE]` ✏️
 
 ## Part 2: Modeling Procedure
 
@@ -25,7 +25,7 @@ You will now apply this procedure to create the detailed architectural model for
 
 ### Step 2: Define the L0 Value Streams
 
-<!-- INSERT VALUESTREAMS.MD -->
+`[INSERT VALUESTREAMS.MD HERE]` ✏️
 
 ### Step 3: Discover L2 Capabilities and Value Stream Stages Iteratively
 
@@ -94,4 +94,4 @@ For each L0 `ValueStream`, you will now group its L2 stages into L1 stages. This
 5. **Explicitly Present All Derived Relationships (Mandatory Checkpoint):**
    To ensure upward coherence, you must now explicitly list the complete, unique set of all non-composition L1 relationships created in Steps 6.3.
 
-<!-- INSERT FOOTER.MD -->
+`[INSERT FOOTER.MD HERE]` ✏️

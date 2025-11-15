@@ -1,4 +1,4 @@
-<!-- INSERT HEADER.MD -->
+`[INSERT HEADER.MD HERE]` ✏️
 
 ## Part 2: Modeling Procedure
 
@@ -19,7 +19,7 @@ Your primary goal is to create a coherent architectural model for the core busin
 
 ### Step 3: Develop the L0 Value Streams
 
-<!-- INSERT VALUESTREAMS.MD -->
+`[INSERT VALUESTREAMS.MD HERE]` ✏️
 
 ### Step 4: Decompose and Map Architecture to Value Streams
 
@@ -27,7 +27,7 @@ Your primary goal is to create a coherent architectural model for the core busin
 2. **Define Architectural Mappings:** Create mappings between the elements from the catalogs to show how they relate to each other:
    * Map `ValueStreams` (and stages) to the `Capabilities` that realize them.
    * Map `Capabilities` to the `BusinessObjects` they modify.
-   <!-- CONDITION B: * Define support relationships between `Capabilities` to ensure all capabilities have a purpose. -->
+   * `[CONDITION B ONLY:]` ✏️ Define support relationships between `Capabilities` to ensure all capabilities have a purpose.
 
 ### Step 5: Prepare for Final Output
 
@@ -35,4 +35,4 @@ Your primary goal is to create a coherent architectural model for the core busin
 2. Assign a `Level` property to all elements based on their position in their respective hierarchies (top-level elements are Level 0, their children are Level 1, and so on).
 3. Assign a `Sequence` property to the decomposed `ValueStream` elements.
 
-<!-- INSERT FOOTER.MD -->
+`[INSERT FOOTER.MD HERE]` ✏️

@@ -6,7 +6,7 @@ You are an experienced business architect tasked with creating a business archit
 
 ### Sector Context Profile
 
-**Sector to be Analyzed:** <!-- ENTER SECTOR NAME -->
+**Sector to be Analyzed:** `[ENTER SECTOR NAME HERE]` ✏️
 
 * **Core Purpose & Societal Role:** Describe the sector's fundamental purpose. Why does it exist? What societal need does it fulfill?
 * **Primary Business Model Archetype(s):** Identify the dominant business model. Think in terms of B2C (to consumers), B2B (to businesses), B2G (to government), or non-profit/public funding. A hybrid model is possible.
