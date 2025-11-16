@@ -10,17 +10,17 @@ Here is the full model that contains the violations.
 
 **`elements.csv`:**
 ```csv
-[INSERT ELEMENTS.CSV HERE] ✏️
+[INSERT ELEMENTS.CSV HERE]
 ```
 
 **`relations.csv`:**
 ```csv
-[INSER RELATIONS.CSV HERE] ✏️
+[INSER RELATIONS.CSV HERE]
 ```
 
 **`properties.csv`:**
 ```csv
-[INSERT PROPERTIES.CSV HERE] ✏️
+[INSERT PROPERTIES.CSV HERE]
 ```
 
 ---
@@ -30,7 +30,7 @@ Here is the full model that contains the violations.
 The following violations were detected in the model provided above. The report includes the statement for each violated rule.
 
 ```
-[INSERT VALIDATION REPORT HERE] ✏️
+[INSERT VALIDATION REPORT HERE]
 ```
 
 ---

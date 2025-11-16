@@ -1,4 +1,6 @@
-`[INSERT HEADER.MD HERE]` ✏️
+```
+[INSERT HEADER.MD HERE]
+```
 
 ## Part 2: Modeling Procedure
 
@@ -9,7 +11,9 @@ Your primary goal is to create a coherent architectural model for the core busin
 1. **Principle of Reusability:** You must develop a single, canonical set of capabilities that can be reused for multiple value streams.
 2. **Principle of Grounding:** After developing the core architecture, you will ground it by mapping it to the value streams defined in Part 1 to ensure nothing is missing.
 
-<!-- CONDITION B: INSERT CONSTRAINTS.MD -->
+```
+[CONDITION B: INSERT CONSTRAINTS.MD HERE]
+```
 
 ### Step 2: Develop Capability and Object Catalogs
 
@@ -19,7 +23,9 @@ Your primary goal is to create a coherent architectural model for the core busin
 
 ### Step 3: Develop the L0 Value Streams
 
-`[INSERT VALUESTREAMS.MD HERE]` ✏️
+```
+[INSERT VALUESTREAMS.MD HERE]
+```
 
 ### Step 4: Decompose and Map Architecture to Value Streams
 
@@ -27,7 +33,9 @@ Your primary goal is to create a coherent architectural model for the core busin
 2. **Define Architectural Mappings:** Create mappings between the elements from the catalogs to show how they relate to each other:
    * Map `ValueStreams` (and stages) to the `Capabilities` that realize them.
    * Map `Capabilities` to the `BusinessObjects` they modify.
-   * `[CONDITION B ONLY:]` ✏️ Define support relationships between `Capabilities` to ensure all capabilities have a purpose.
+   * ```
+     [CONDITION B ONLY:] Define support relationships between `Capabilities` to ensure all capabilities have a purpose.
+     ```
 
 ### Step 5: Prepare for Final Output
 
@@ -35,4 +43,6 @@ Your primary goal is to create a coherent architectural model for the core busin
 2. Assign a `Level` property to all elements based on their position in their respective hierarchies (top-level elements are Level 0, their children are Level 1, and so on).
 3. Assign a `Sequence` property to the decomposed `ValueStream` elements.
 
-`[INSERT FOOTER.MD HERE]` ✏️
+```
+[INSERT FOOTER.MD HERE]
+```
