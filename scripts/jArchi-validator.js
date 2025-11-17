@@ -151,7 +151,7 @@ const report = {
         C0: {
             name: 'Valid level',
             statement: 'Each element must be assigned a level that corresponds to its number of ancestors.',
-            type: false // false if the rule concerns only one element type, true if it concerns coherence between submodels
+            coherence: false // false if the rule concerns only one element type, true if it concerns coherence between submodels
             // Added later: opportunityCount, violationCount, examples
         },
         C1: {
